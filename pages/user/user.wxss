@@ -1,0 +1,22 @@
+/* pages/user/user.wxss*/
+page{background:#f2f2f2;}
+.top{height: 32.8vw;width: 100vw;background: #1b325f;}
+.banner{width: 93.33vw;height: 47.73vw;display: flex;align-items: center;top: 1.8vw;background: #f26c4f;flex-direction: column;left: 3.33vw;border-radius: 1.33vw;margin: -32vw 3.33vw 4.8vw;justify-content: space-around;}
+.vip-container{width: 28.53vw;height: 7.87vw;line-height:7.87vw;background: white;border-radius: 1.33vw;margin-bottom: 4vw;font-size: 3.47vw;}
+.vip-image{width: 4.67vw;height: 4.67vw;margin:0 1.87vw 0 4.13vw;display:inline-block;vertical-align: middle;}
+.nickname{font-size: 4.53vw;color: white;}
+.avatar{width: 20vw;height: 20vw;overflow: hidden;margin-top: 4.27vw;border-radius: 100%;}
+.navigator,navigator{height:12vw;border-bottom:1px solid #f2f2f2;background:white;line-height:12vw;font-size:3.87vw;}
+.navigator:after,navigator:after{content:"";float:right;width:3vw;height:3vw;border-right:1px solid black;border-top:1px solid black;transform: rotate(45deg);margin:4vw 5.33vw 0;}
+.icon{width:6.87vw;height:6.87vw;margin:0 2.8vw 0 3.2vw;vertical-align: middle;}
+.item{height:12vw;line-height:12vw;background:white;font-size:3.87vw;color:#646464;border-bottom:1px solid #e6e6e6;}
+input,select{height:100%;float:right;width:56vw;color:black;position:relative;margin-right:2.67vw;}
+.item-icon{height:6vw;width:6vw;margin:0 2.53vw 0 3.33vw;vertical-align: middle;}
+.user-info-btn{margin:5vw auto;color:white;background:#f26c4f;font-size:5.07vw;width:85%;line-height:44px;}
+.complete_tips{color:#fff;background:#f26c4f;border-radius:5px;margin-left:10px;font-size:14px;padding:2px 8px;}
+.user_points{}
+.user_points_wrapper{display: flex;}
+.user_points_wrapper .user_points_img_view{display: flex;justify-content: center;align-items: center;}
+.user_points_wrapper .user_points_img_view .user_points_img{}
+.user_points_wrapper .user_points_tittle{flex:2;}
+.user_points_wrapper .user_points{color: #f26c4f;}

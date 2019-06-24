@@ -1,0 +1,12 @@
+<!--template/modal/modal.wxml-->
+<view class="mask">
+  <view class="container">
+    <icon type="clear" color="#ff6342" bindtap="onClose"/>
+    <image src="{{icon}}"class="icon" />
+    <view class="name">{{name}}</view>
+    <view class="yaodian">要点:</view>
+    <view class="content">{{content}}</view>
+    <view class="advisory" bindtap="onCommunication">咨询</view>
+    <view class="contract" bindtap="onContract">合同</view>
+  </view>
+</view>

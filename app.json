@@ -1,0 +1,65 @@
+{
+  "pages": [
+        "pages/index/index",
+    "pages/set_question/set_question",
+    "pages/question_info/question_info",
+    "pages/question_deal/question_deal",
+    "pages/review/review",
+    "pages/order_info/order_info",
+    "pages/user/user",
+    "pages/pay/pay",
+    "pages/question/question",
+    "pages/order/order",
+    "pages/service/service",
+    "template/modal/modal"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1b325f",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#fff",
+    "selectedColor": "#f26c4f",
+    "backgroundColor": "#1b325f",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tabbar/index2.png",
+        "selectedIconPath": "images/tabbar/index_selected2.png"
+      },
+      {
+        "pagePath": "pages/set_question/set_question",
+        "text": "需求",
+        "iconPath": "images/tabbar/service2.png",
+        "selectedIconPath": "images/tabbar/service_selected2.png"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "服务",
+        "iconPath": "images/tabbar/service2.png",
+        "selectedIconPath": "images/tabbar/service_selected2.png"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "客服",
+        "iconPath": "images/tabbar/kefu2.png",
+        "selectedIconPath": "images/tabbar/kefu_selected2.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/tabbar/user2.png",
+        "selectedIconPath": "images/tabbar/user_selected2.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

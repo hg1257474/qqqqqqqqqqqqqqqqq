@@ -1,0 +1,30 @@
+<view class="main">
+  <view class="nav-bar">
+  <!--bindtap="onCategoryTap"-->
+    <view wx:for="{{indexPage}}" wx:key="{{index}}" data-id="{{index}}" class="category {{ category === index ? 'category-selected':''}}" bindtap="onCategoryTap" data-current="{{index}}">
+      <image mode="aspectFit" src="{{item[0]}}" class="category-icon"></image>
+      <view class="category-name">{{item[1]}}</view>
+    </view>
+  </view>
+
+  <view class="content-bar" >
+    <view wx:for="{{indexPage}}" wx:for-index="idx" wx:for-item="services" wx:key="{{idx}}">
+      <view class="services-name">{{services[1]}}</view>
+        <view class="services-introduction">({{services[2]}})</view>
+        <view wx:for="{{services[3]}}" wx:key="{{index}}" class="service-box">
+          <image class="service-icon" mode="aspectFit" src="{{item[0]}}"></image>
+          <view class="service-content">
+            <view class="service-name">{{item[1]}}</view>
+            <view class="service-introduction">{{item[2]}}</view>
+            <view bindtap="onChoose" data-service="{{index}}" data-category="{{idx}}" class="{{(idx==modal.category&&index===modal.service)?'to-talk service-selected':'to-talk'}}"></view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+</view>
+
+<view wx:if="{{modal.show}}">
+  <modal bindcommunication="onCommunication" bindcontract="onContract" bindclose="onClose" icon="{{modal.icon}}" name="{{modal.name}}" content="{{modal.content}}" />
+</view>

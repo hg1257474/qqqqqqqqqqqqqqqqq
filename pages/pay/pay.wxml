@@ -1,0 +1,31 @@
+<!--pages/pay/pay.wxml-->
+<view wx:if="{{!shouldPayContract}}">
+  <view class="banner-background">
+  </view>
+  <image class="com-img" src="/images/pay/communication.png"></image>
+  <view class="com-title">咨询业务</view>
+
+  <view class="categories">
+    <view class="{{category==='0'?'category category-selected':'category'}}" data-id="0" bindtap="onTap">单次</view>
+    <view class="{{category==='1'?'category category-selected':'category'}}" data-id="1" bindtap="onTap">包月</view>
+    <view class="{{category==='2'?'category category-selected':'category'}}" data-id="2" bindtap="onTap">包年</view>
+  </view>
+  <view class="service-table">
+    <view class="price-block">
+      <view class="service-left">服务价格</view>
+      <view class="service-right service-right-top">{{payPage[category][0]/100}}元</view>
+    </view>
+    <view class="detail-block">
+      <view class="service-left">服务说明</view>
+      <view class="service-right">{{payPage[category][1]}}</view>
+    </view>
+  </view>
+
+  <button bindtap="onPay" class="com-btn">立即支付</button>
+</view>
+<view wx:if="{{shouldPayContract}}" class="contract">
+  <image class="con-img" src="/images/pay/contract.png"></image>
+  <view class="con-service">{{service}}</view>
+  <view class="con-fee">{{totalFee/100}}元</view>
+  <button bindtap="onPay" class="con-btn">立即支付</button>
+</view>

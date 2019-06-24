@@ -1,0 +1,113 @@
+<!--pages/set_question/set_question.wxml-->
+<view class="main p-t">
+<navigator url="/pages/question_deal/question_deal">处理合同</navigator>
+<navigator url="/pages/question_info/question_info">查看订单</navigator>
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_hetong.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">合同类型</text>
+    <view class="single_info_content">
+      <radio-group class="radio-group" bindchange="contract_type_change">
+        <label class="radio_label" wx:for="{{contract_type}}" wx:for-index="idx" wx:for-item="itemName" wx:key="name">
+          <image src="/images/set_question/{{itemName.name === contract_type_checked ? itemName.src : itemName.checked_src}}" class="radio_img"></image>
+          <radio class="radio" value="{{itemName.name}}" checked="{{itemName.checked}}"></radio>
+          <text>{{itemName.value}}</text>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_note.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">需求描述</text>
+    <view class="single_info_content"></view>
+  </view>
+  <view class='single_info_content'>
+    <textarea name="" placeholder="请输入您的问题或需求" class="add_note"></textarea>
+    <view class="upload_flie_wrapper">
+      <view class="upload_flie_tittle text-center">上传文件</view>
+      <view class="upload_flie_content">
+        <button class="upload_flie_btn m-r">选择文件</button>
+        <text class="upload_flie_tips">不能上传大于10M的文件</text>
+      </view>
+      <view class="upload_flie_list">
+        <view class="upload_flie_data">
+          <view class="upload_flie_img_wrapper">
+            <image src="/images/set_question/set_question_icon_flie.png" class="upload_flie_img"></image>
+          </view>
+          <view class="upload_flie_data_content">
+            <view class="upload_flie_name">Contract documents.doc</view>
+            <view class="upload_flie_size">160.5 KB</view>
+          </view>
+          <view class="upload_flie_close_wrapper">
+            <image src="/images/set_question/set_question_icon_close.png" class="upload_flie_close"></image>
+          </view>
+        </view>
+        <view class="upload_flie_data">
+          <view class="upload_flie_img_wrapper">
+            <image src="/images/set_question/set_question_icon_img.png" class="upload_flie_img"></image>
+          </view>
+          <view class="upload_flie_data_content">
+            <view class="upload_flie_name">contract.png</view>
+            <view class="upload_flie_size">16.3 KB</view>
+          </view>
+          <view class="upload_flie_close_wrapper">
+            <image src="/images/set_question/set_question_icon_close.png" class="upload_flie_close"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_lx_type.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">选择沟通方式</text>
+    <view class="single_info_content">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio_label" wx:for-items="{{lx_type}}" wx:key="name">
+          <image src="/images/set_question/{{item.name === radioCheckVal ? item.src : item.checked_src}}" class="radio_img"></image>
+          <!-- <image src="/images/set_question/{{item.checked_src}}" class="radio_img"></image> -->
+          <radio class="radio" value="{{item.name}}" checked="{{item.checked}}"></radio>
+          <text>{{item.value}}</text>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_info.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">老板信息</text>
+    <view class="single_info_content"></view>
+  </view>
+  <view class="single_info_content">
+    
+    <view class="single_user_data">
+      <view class="user_name">联系人</view>    
+      <view class="user_wirte_wrapper">
+        <input type="text" placeholder="联系人姓名" class="user_wirte_input"/>
+      </view>    
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">电话</view>    
+      <view class="user_wirte_wrapper">
+        <input type="number" placeholder="电话号码" class="user_wirte_input"/>
+      </view>    
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">微信</view>    
+      <view class="user_wirte_wrapper">
+        <input type="text" placeholder="微信账号" class="user_wirte_input"/>
+      </view>    
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">钉钉</view>    
+      <view class="user_wirte_wrapper">
+        <input type="text" placeholder="钉钉账号" class="user_wirte_input"/>
+      </view>    
+    </view>
+
+  </view>
+  <button class="upload_flie_submit">提交</button>
+</view>

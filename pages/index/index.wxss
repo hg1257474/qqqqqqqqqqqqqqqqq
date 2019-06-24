@@ -1,0 +1,20 @@
+
+/**index.wxss**/.main{width: 100%;height: 100%;}
+.nav-bar{z-index: 1;position: fixed;width: 25.6vw;height: 100%;background: #f5f9fc;}
+.category{display: flex;justify-content: center;align-items: center;font-size: 3.47vw;width: 100%;height: 14.13vw;}
+.category-icon{width:25px;height:25px;margin:0px 5px;}
+.category-name{flex:2;}
+.category-selected{background: white;}
+.content-bar{padding-left: 212rpx;width: 100%;height: 100%;}
+.services-name{margin:30rpx 0 20rpx;font-size: 4.67vw;width: 24vw;display: inline-block;}
+.services-introduction{display: block;font-size: 22rpx;color: #989898;}
+.service-box{height:186rpx;margin:5vw 0;}
+.service-icon{width: 186rpx;height: 186rpx;float: left;}
+.service-content{float: left;vertical-align: top;margin-left: 15rpx;position: relative;height: 186rpx;}
+.service-name{font-size: 35rpx;}
+.service-introduction{font-size: 22rpx;color: #989898;width: 314rpx;margin-top: 17rpx;}
+.service-introduction::after{content: "...";}
+.to-talk{border-radius: 50%;background-color: rgb(187, 187, 187);width: 43rpx;height: 43rpx;margin-left: 265rpx;position: absolute;right: 1vw;bottom: 1vw;}
+.service-selected{background: #208be3;}
+.to-talk::before{content: "";background-color: rgb(255, 255, 255);position: absolute;width: 5rpx;height: 27rpx;left: 19rpx;top: 8rpx;}
+.to-talk::after{content: "";background-color: rgb(255, 255, 255);position: absolute;width: 27rpx;height: 5rpx;left: 8rpx;top: 19rpx;}
