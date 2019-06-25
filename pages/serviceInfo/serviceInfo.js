@@ -4,7 +4,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order_state:"付款中",
+    description:"asdddddddddddddddddd",
+    isTextDescriptionType:true,
+    shouldViewDescription:true,
+    shouldViewContact:true,
+    status:"待回复",
+    name:"合同-咨询",
     // 老板信息
     user_info: {
       name: "张于宴",
@@ -13,8 +18,6 @@ Page({
       dingding: "dd_352463038",
     },
     contract_type: "合同起草",                        // 合同类型
-    question_note: "请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求请输入您的问题或需求",
-    service_finish: "输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西输入总结的东西",
     radioCheckVal: 'vw',                              // 沟通方式选中
     // 沟通方式
     items: [
@@ -278,4 +281,10 @@ Page({
       })
     }
   },
+  onChangeDescriptionShow(){
+    this.setData({shouldViewDescription:!this.data.shouldViewDescription})
+  },
+  onChangeContactShow() {
+    this.setData({ shouldViewContact: !this.data.shouldViewContact })
+  }
 })

@@ -1,6 +1,0 @@
-<!--pages/question/question.wxml-->
-<form bindsubmit='onSubmit' report-submit="{{true}}">
-  <view>请详细描述您的问题</view>
-  <textarea name="question"></textarea>
-  <button form-type='submit' >发送</button>
-</form>

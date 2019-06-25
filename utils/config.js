@@ -7,6 +7,8 @@ exports.staticUrl = url + "/static/customer"
 exports.questionUrl = url + "/customer/question"
 exports.reviewUrl = url + "/customer/review"
 exports.payUrl = url + "/pay"
+exports.serviceUrl = url + "/service"
+exports.serviceListUrl = url + "/serviceList"
 //
 /*
   

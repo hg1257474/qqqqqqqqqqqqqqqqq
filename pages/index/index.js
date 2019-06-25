@@ -12,6 +12,7 @@ const setSessionId = (res) => {
       if (value.includes("EGG_SESS")) {
         wx.setStorageSync("sessionId", value.split(";")[0])
       } else {
+        console.log(value.match(/=([^;]+);/)[1])
         wx.setStorageSync(value.split("=")[0], JSON.parse(decodeURIComponent(value.match(/=([^;]+);/)[1])))
       }
     })
@@ -74,7 +75,7 @@ Page({
             console.log(res)
             setSessionId(res)
             if (res.statusCode === 304) {
-              that.setData(indexPage)
+              that.setData({indexPage:indexPage})
             } else {
               wx.setStorageSync("indexPage", res.data)
               that.setData({
@@ -115,15 +116,15 @@ Page({
       }
     }
   }) {
-    console.log(servicesGroup[category][2][service][0]);
+    //console.log(servicesGroup[category][2][service][0]);
     this.setData({
       modal: {
         service,
         category,
         show: true,
-        icon: servicesGroup[category][2][service][0],
-        name: servicesGroup[category][2][service][1],
-        content: servicesGroup[category][2][service][3]
+        icon: this.data.indexPage[category][3][service][0],
+        name: this.data.indexPage[category][3][service][1],
+        content: this.data.indexPage[category][3][service][3]
       }
     }, function() {})
   },
@@ -175,9 +176,12 @@ Page({
     })
   },
   onContract: function(e) {
-    // console.log("contract")
+    console.log("contract")
+    console.log(this.data)
+    const category = this.data.indexPage[this.data.modal.category][1]
+    const target = this.data.indexPage[this.data.modal.category][3][this.data.modal.service][1]
     wx.navigateTo({
-      url: `/pages/question/question?category=${this.data.modal.category}&name=${this.data.modal.service}&type=1`
+      url: `/pages/submitService/submitService?category=${category}&target=${target}&method=contract&contract_type_checked=1`
     })
   },
   onCommunication: function(e) {

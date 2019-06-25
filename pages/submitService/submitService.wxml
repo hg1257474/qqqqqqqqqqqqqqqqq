@@ -1,8 +1,7 @@
 <!--pages/set_question/set_question.wxml-->
+<form bindsubmit='onSubmit'>
 <view class="main p-t">
-<navigator url="/pages/question_deal/question_deal">处理合同</navigator>
-<navigator url="/pages/question_info/question_info">查看订单</navigator>
-  <view class="single_info_wrapper">
+  <view wx:if="{{method==='contract'}}" class="single_info_wrapper">
     <image src="/images/set_question/set_question_icon_hetong.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">合同类型</text>
     <view class="single_info_content">
@@ -22,8 +21,8 @@
     <view class="single_info_content"></view>
   </view>
   <view class='single_info_content'>
-    <textarea name="" placeholder="请输入您的问题或需求" class="add_note"></textarea>
-    <view class="upload_flie_wrapper">
+    <textarea wx:if="{{contract_type_checked!=='1'}}" name="detail" placeholder="请输入您的问题或需求" class="add_note"></textarea>
+    <view wx:if="{{contract_type_checked==='1'}}" class="upload_flie_wrapper">
       <view class="upload_flie_tittle text-center">上传文件</view>
       <view class="upload_flie_content">
         <button class="upload_flie_btn m-r">选择文件</button>
@@ -83,31 +82,32 @@
     <view class="single_user_data">
       <view class="user_name">联系人</view>    
       <view class="user_wirte_wrapper">
-        <input type="text" placeholder="联系人姓名" class="user_wirte_input"/>
+        <input type="text" name="name" placeholder="联系人姓名" class="user_wirte_input"/>
       </view>    
     </view>
 
     <view class="single_user_data">
       <view class="user_name">电话</view>    
       <view class="user_wirte_wrapper">
-        <input type="number" placeholder="电话号码" class="user_wirte_input"/>
+        <input type="number" name="phone" placeholder="电话号码" class="user_wirte_input"/>
       </view>    
     </view>
 
-    <view class="single_user_data">
+    <view wx:if="{{radioCheckVal==='vw'}}" class="single_user_data">
       <view class="user_name">微信</view>    
       <view class="user_wirte_wrapper">
-        <input type="text" placeholder="微信账号" class="user_wirte_input"/>
+        <input type="text" name="weChat" placeholder="微信账号" class="user_wirte_input"/>
       </view>    
     </view>
 
-    <view class="single_user_data">
+    <view wx:if="{{radioCheckVal==='dingding'}}" class="single_user_data">
       <view class="user_name">钉钉</view>    
       <view class="user_wirte_wrapper">
-        <input type="text" placeholder="钉钉账号" class="user_wirte_input"/>
+        <input type="text" name="dingTalk" placeholder="钉钉账号" class="user_wirte_input"/>
       </view>    
     </view>
 
   </view>
-  <button class="upload_flie_submit">提交</button>
+  <button form-type="submit" class="upload_flie_submit">提交</button>
 </view>
+</form>

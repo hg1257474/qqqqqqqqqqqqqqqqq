@@ -1,16 +1,21 @@
 {
   "pages": [
+            "pages/serviceInfo/serviceInfo",
+        "pages/question_deal/question_deal",
         "pages/index/index",
-    "pages/set_question/set_question",
-    "pages/question_info/question_info",
-    "pages/question_deal/question_deal",
+        "pages/user/user",
+
+        "pages/order_info/order_info",
+
+
+    "pages/serviceList/serviceList",
+
+    "pages/submitService/submitService",
     "pages/review/review",
-    "pages/order_info/order_info",
-    "pages/user/user",
+
+
     "pages/pay/pay",
-    "pages/question/question",
     "pages/order/order",
-    "pages/service/service",
     "template/modal/modal"
   ],
   "permission": {
@@ -36,22 +41,10 @@
         "selectedIconPath": "images/tabbar/index_selected2.png"
       },
       {
-        "pagePath": "pages/set_question/set_question",
-        "text": "需求",
-        "iconPath": "images/tabbar/service2.png",
-        "selectedIconPath": "images/tabbar/service_selected2.png"
-      },
-      {
-        "pagePath": "pages/service/service",
+        "pagePath": "pages/serviceList/serviceList",
         "text": "服务",
         "iconPath": "images/tabbar/service2.png",
         "selectedIconPath": "images/tabbar/service_selected2.png"
-      },
-      {
-        "pagePath": "pages/service/service",
-        "text": "客服",
-        "iconPath": "images/tabbar/kefu2.png",
-        "selectedIconPath": "images/tabbar/kefu_selected2.png"
       },
       {
         "pagePath": "pages/user/user",
