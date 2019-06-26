@@ -9,6 +9,8 @@ exports.reviewUrl = url + "/customer/review"
 exports.payUrl = url + "/pay"
 exports.serviceUrl = url + "/service"
 exports.serviceListUrl = url + "/serviceList"
+exports.fileUploadUrl = url + "/service/file"
+exports.fileUploadPageUrl = url + "/service/file/page"
 //
 /*
   

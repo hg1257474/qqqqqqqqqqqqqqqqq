@@ -25,29 +25,17 @@
     <view wx:if="{{contract_type_checked==='1'}}" class="upload_flie_wrapper">
       <view class="upload_flie_tittle text-center">上传文件</view>
       <view class="upload_flie_content">
-        <button class="upload_flie_btn m-r">选择文件</button>
+        <button class="upload_flie_btn m-r" bindtap="onChooseFile">选择文件</button>
         <text class="upload_flie_tips">不能上传大于10M的文件</text>
       </view>
       <view class="upload_flie_list">
-        <view class="upload_flie_data">
+        <view class="upload_flie_data" wx:for="{{files}}" wx:key="{{index}}">
           <view class="upload_flie_img_wrapper">
             <image src="/images/set_question/set_question_icon_flie.png" class="upload_flie_img"></image>
           </view>
           <view class="upload_flie_data_content">
-            <view class="upload_flie_name">Contract documents.doc</view>
-            <view class="upload_flie_size">160.5 KB</view>
-          </view>
-          <view class="upload_flie_close_wrapper">
-            <image src="/images/set_question/set_question_icon_close.png" class="upload_flie_close"></image>
-          </view>
-        </view>
-        <view class="upload_flie_data">
-          <view class="upload_flie_img_wrapper">
-            <image src="/images/set_question/set_question_icon_img.png" class="upload_flie_img"></image>
-          </view>
-          <view class="upload_flie_data_content">
-            <view class="upload_flie_name">contract.png</view>
-            <view class="upload_flie_size">16.3 KB</view>
+            <view class="upload_flie_name">{{item[0]}}</view>
+            <view class="upload_flie_size">{{item[1]}}</view>
           </view>
           <view class="upload_flie_close_wrapper">
             <image src="/images/set_question/set_question_icon_close.png" class="upload_flie_close"></image>

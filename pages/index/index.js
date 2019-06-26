@@ -16,7 +16,7 @@ const setSessionId = (res) => {
         wx.setStorageSync(value.split("=")[0], JSON.parse(decodeURIComponent(value.match(/=([^;]+);/)[1])))
       }
     })
-  } else {
+  } else if (res.header["Set-Cookie"]) {
     console.log(res.header["Set-Cookie"])
     wx.setStorageSync("sessionId", res.header["Set-Cookie"].match(/EGG_SESS=([^;]+)/)[0])
     wx.setStorageSync("vip", res.header["Set-Cookie"].match(/asd/))
@@ -75,7 +75,9 @@ Page({
             console.log(res)
             setSessionId(res)
             if (res.statusCode === 304) {
-              that.setData({indexPage:indexPage})
+              that.setData({
+                indexPage: indexPage
+              })
             } else {
               wx.setStorageSync("indexPage", res.data)
               that.setData({

@@ -1,22 +1,16 @@
 {
   "pages": [
-            "pages/serviceInfo/serviceInfo",
-        "pages/question_deal/question_deal",
-        "pages/index/index",
-        "pages/user/user",
-
-        "pages/order_info/order_info",
-
-
+    "pages/index/index",
+    "pages/serviceInfo/serviceInfo",
+    "pages/question_deal/question_deal",
+    "pages/user/user",
+    "pages/order_info/order_info",
     "pages/serviceList/serviceList",
-
     "pages/submitService/submitService",
-    "pages/review/review",
-
-
     "pages/pay/pay",
     "pages/order/order",
-    "template/modal/modal"
+    "template/modal/modal",
+    "pages/fileUpload/fileUpload"
   ],
   "permission": {
     "scope.userLocation": {
