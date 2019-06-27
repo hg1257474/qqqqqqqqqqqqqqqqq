@@ -37,7 +37,7 @@
             <view class="upload_flie_name">{{item[0]}}</view>
             <view class="upload_flie_size">{{item[1]}}</view>
           </view>
-          <view class="upload_flie_close_wrapper">
+          <view class="upload_flie_close_wrapper" data-id="{{item[2]}}" bindtap="onDeleteFile">
             <image src="/images/set_question/set_question_icon_close.png" class="upload_flie_close"></image>
           </view>
         </view>

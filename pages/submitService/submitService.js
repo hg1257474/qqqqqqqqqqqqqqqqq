@@ -53,8 +53,19 @@ Page({
       this.setData(options)
     }
   },
+  onDeleteFile:function(e){
+    const that=this
+    const id=e.currentTarget.dataset.id
+    wx.request({
+      url:fileUploadUrl+"/"+id,
+      method:"DELETE",
+      success(res){
+        const files=that.data.files.filter(item=>item[2]!==id)
+        that.setData({files})
+      }
+    })
+  },
   onShow() {
-    /*
     const that = this
     if (this.data.tempFileId) {
       wx.request({
@@ -73,7 +84,6 @@ Page({
         }
       })
     }
-    */
   },
   onChooseFile: function(options) {
     const that = this
@@ -113,7 +123,7 @@ Page({
           method: this.data.radioCheckVal === "vw" ? 'weChat' : 'dingTalk',
           content: this.data.radioCheckVal === 'vw' ? value.weChat : value.dingTalk
         },
-        description: this.data.contract_type_checked === "1" ? "file" : value.detail
+        description: this.data.contract_type_checked === "1" ? this.data.files : value.detail
       },
       success(res) {
         if (res.statusCode === 201) {

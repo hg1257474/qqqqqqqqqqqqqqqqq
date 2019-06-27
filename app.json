@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/serviceInfo/serviceInfo",
-    "pages/question_deal/question_deal",
     "pages/user/user",
     "pages/order_info/order_info",
     "pages/serviceList/serviceList",

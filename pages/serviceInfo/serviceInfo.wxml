@@ -27,17 +27,17 @@
     <view wx:if="{{!isTextDescriptionType}}" class="upload_flie_wrapper">
       <view class="upload_flie_tittle text-center">上传文件</view>
       <view class="upload_flie_list">
-        <view class="upload_flie_data">
+        <view class="upload_flie_data" wx:for="{{description}}">
           <view class="upload_flie_img_wrapper">
             <image src="/images/set_question/set_question_icon_flie.png" class="upload_flie_img"></image>
           </view>
           <view class="upload_flie_data_content">
-            <view class="upload_flie_name">Contract documents.doc</view>
-            <view class="upload_flie_size">160.5 KB</view>
+            <view class="upload_flie_name">{{item[0]}}</view>
+            <view class="upload_flie_size">{{item[1]}}</view>
           </view>
           <view class="upload_flie_function">
-            <button class="upload_flie_btn upload_flie_scan">查看</button>
-            <button class="upload_flie_btn upload_flie_down">下载</button>
+            <button class="upload_flie_btn upload_flie_scan" data-index="{{index}}" bindtap="onPreviewFile">查看</button>
+            <button class="upload_flie_btn upload_flie_down" data-index="{{index}}" bindtap="onDownloadFile">下载</button>
           </view>
         </view>
       </view>
@@ -49,7 +49,7 @@
     <text class="single_info_name">预留沟通方式</text>
     <view class="single_info_content">
       <radio-group class="radio-group" bindchange="radioChange">
-        <label class="radio_label" >
+        <label class="radio_label">
           <image src="/images/set_question/{{contact.method === 'weChat'?'set_question_icon_wx_active':'set_question_icon_ding_active'}}.png" class="radio_img"></image>
         </label>
       </radio-group>
@@ -100,7 +100,7 @@
     <view class="single_info_content">
       {{payment[0]}}
       <text>元</text>
-      <button class="pay_now">{{payment[1]?'查看':'去付款'}}</button>
+      <button class="pay_now" bindtap="onPay">{{payment[1]?'查看':'去付款'}}</button>
     </view>
   </view>
   <view class="single_info_wrapper" wx:if="{{processor}}" bindtap="onChangeProcessorShow">
