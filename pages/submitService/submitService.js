@@ -3,6 +3,7 @@ const {
   serviceUrl,
   fileUploadUrl
 } = require("../../utils/config.js")
+let tempFileId=null
 Page({
 
   /**
@@ -53,34 +54,42 @@ Page({
       this.setData(options)
     }
   },
-  onDeleteFile:function(e){
-    const that=this
-    const id=e.currentTarget.dataset.id
+  onDeleteFile: function(e) {
+    const that = this
+    const id = e.currentTarget.dataset.id
     wx.request({
-      url:fileUploadUrl+"/"+id,
-      method:"DELETE",
-      success(res){
-        const files=that.data.files.filter(item=>item[2]!==id)
-        that.setData({files})
+      url: fileUploadUrl + "/" + id,
+      method: "DELETE",
+      success(res) {
+        const files = that.data.files.filter(item => item[2] !== id)
+        that.setData({
+          files
+        })
       }
     })
   },
   onShow() {
+    this.onLoad()
     const that = this
-    if (this.data.tempFileId) {
+    if (tempFileId) {
       wx.request({
-        url: fileUploadUrl + "/summary/" + this.data.tempFileId,
+        url: fileUploadUrl + "/summary/" + tempFileId,
         method: "GET",
         success(res) {
           console.log(res.data)
           console.log(that.data)
-          res.data.push(that.data.tempFileId)
+          res.data.push(tempFileId)
           console.log(that.data.files)
           that.data.files.push(res.data)
+          tempFileId = null
+          console.log(that.data.files)
+          const newFiles=that.data.files.map(item=>item)
+          console.log(newFiles)
+          
           that.setData({
-            files: that.data.files,
-            tempFileId: null
+            files: newFiles
           })
+          
         }
       })
     }
@@ -92,12 +101,12 @@ Page({
       method: "POST",
       success(res) {
         console.log(res)
+        tempFileId = res.data
+        console.log("f")
         wx.navigateTo({
           url: "/pages/fileUpload/fileUpload?id=" + res.data
         })
-        that.setData({
-          tempFileId: res.data
-        })
+       
       }
     })
   },

@@ -1,7 +1,8 @@
 // pages/user/user.js
 const {
-  customerUrl
+  _customerUrl
 } = require("../../utils/config.js")
+let customerUrl=_customerUrl+"/info"
 //const vips = ["普通", "月度", "年度"]
 Page({
 
@@ -9,20 +10,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shouldShowInput: false,
+    shouldShowInfo: false,
     hasChange: false,
     franchiseModes: ['纯直营', '开放他人加盟', '加盟他人'],
     vip: {
       src: "/images/user/vip_normal.png",
       type: "普通会员"
     },
-    user_points:2000,
+    user_points: 2000,
   },
   onShow() {
-    const {
-      globalData
-    } = getApp()
-    if (globalData.index && globalData.index.shouldCompleteInfo) {
+    if (getApp().globalData.indexPage.shouldCompleteInfo) {
       this.updateInfo()
     }
     this.getUserVip();
@@ -34,10 +32,8 @@ Page({
   },
   getUserVip() {
     const initialization = () => {
-      console.log(wx.getStorageSync("customer"))
-      const vip = wx.getStorageSync("customer").vip
-      console.log(vip)
-      this.setData({
+      const vip = wx.getStorageSync("vip")
+      if(vip) this.setData({
         vip: {
           src: `../../images/user/vip${vip ? "_normal" : "_normal"}.png`,
           type: vip.kind + "会员"
@@ -53,29 +49,23 @@ Page({
     })
   },
   updateInfo() {
-    let info = wx.getStorageSync("customer").info
-    if (info) {
+    if (this.data.info) {
       this.setData({
-        shouldShowInput: true,
-        info
+        shouldShowInfo: true,
       })
       return
     }
     const that = this
     wx.request({
-      url: customerUrl,
+      url: customerUrl + "/info",
       header: {
-        cookie: wx.getStorageSync("sessionId").raw
+        cookie: wx.getStorageSync("sessionId")
       },
       method: "GET",
       success(res) {
-        info = res.data
-        const customer = wx.getStorageSync("customer")
-        customer.info = info
-        wx.setStorageSync("customer", customer)
         that.setData({
-          shouldShowInput: true,
-          info
+          shouldShowInfo: true,
+          info: res.data
         })
       }
     })
@@ -95,7 +85,7 @@ Page({
         method: "PUT",
         data: info,
         header: {
-          cookie: wx.getStorageSync("sessionId").raw
+          cookie: wx.getStorageSync("sessionId")
         },
         success(res) {
           console.log(res)
@@ -105,7 +95,7 @@ Page({
           wx.setStorageSync("customer", customer)
           that.setData({
             info,
-            shouldShowInput: false,
+            shouldShowInfo: false,
             hasChange: false
           })
           if (globalData.index && globalData.index.shouldCompleteInfo) wx.switchTab({
@@ -114,7 +104,7 @@ Page({
         }
       })
     } else this.setData({
-      shouldShowInput: false
+      shouldShowInfo: false
     }, () => {
       if (globalData.index && globalData.index.shouldCompleteInfo) wx.switchTab({
         url: '/pages/index/index',

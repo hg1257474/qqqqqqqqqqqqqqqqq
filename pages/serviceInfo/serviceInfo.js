@@ -1,5 +1,6 @@
 const {
-  serviceUrl,customerUrl
+  serviceUrl,
+  customerUrl
 } = require('../../utils/config.js')
 let serviceFileUrl = null
 let serviceId = null
@@ -47,15 +48,18 @@ Page({
       "info.franchiseMode": e.detail
     })
   },
-  onPay(){
+  onPay() {
     wx.request({
-      url:`${customerUrl}/service/${serviceId}/payConfig`,
-      header:{
-        cookie:wx.getStorageSync("sessionId")
+      url: `${customerUrl}/service/${serviceId}/payConfig`,
+      header: {
+        cookie: wx.getStorageSync("sessionId")
       },
-      success(res){
-        
-        wx.requestPayment(res.data)
+      success(res) {
+        wx.requestPayment({ ...res.data,
+          success(res) {
+            console.log(res)
+          }
+        })
       }
     })
   },
@@ -108,7 +112,9 @@ Page({
     serviceFileUrl = `${serviceUrl}/${options.id}`
     wx.request({
       url: serviceUrl + "/" + options.id,
-      header:{cookie:wx.getStorageSync("sessionId")},
+      header: {
+        cookie: wx.getStorageSync("sessionId")
+      },
       success(res) {
         console.log(res.data)
         res.data.isTextDescriptionType = typeof res.data.description === 'string'
