@@ -1,8 +1,8 @@
 // pages/user/user.js
 const {
-  _customerUrl
+  customerUrl: _customerUrl
 } = require("../../utils/config.js")
-let customerUrl=_customerUrl+"/info"
+let customerUrl = _customerUrl + "/info"
 //const vips = ["普通", "月度", "年度"]
 Page({
 
@@ -19,9 +19,20 @@ Page({
     },
     user_points: 2000,
   },
+  onHide() {
+    if (getApp().globalData.indexPage.shouldCompleteInfo && getApp().globalData.indexPage.shouldCompleteInfo !== "completed") {
+      delete getApp().globalData.indexPage.shouldCompleteInfo
+    }
+  },
+  onReady() {
+    this.setData({
+      isAllInfo: wx.getStorageSync("isAllInfo")
+    })
+  },
   onShow() {
+    // console.log(getApp().globalData.indexPage.shouldCompleteInfo)
     if (getApp().globalData.indexPage.shouldCompleteInfo) {
-      this.updateInfo()
+      this.onChangeInfoShow()
     }
     this.getUserVip();
   },
@@ -33,10 +44,10 @@ Page({
   getUserVip() {
     const initialization = () => {
       const vip = wx.getStorageSync("vip")
-      if(vip) this.setData({
+      if (vip && vip.kind) this.setData({
         vip: {
           src: `../../images/user/vip${vip ? "_normal" : "_normal"}.png`,
-          type: vip.kind + "会员"
+          type: `${vip.kind==="month"?'月度':'年度'}会员`
         }
       })
     }
@@ -48,7 +59,7 @@ Page({
       "info.franchiseMode": e.detail
     })
   },
-  updateInfo() {
+  onChangeInfoShow() {
     if (this.data.info) {
       this.setData({
         shouldShowInfo: true,
@@ -56,8 +67,9 @@ Page({
       return
     }
     const that = this
+    console.log(wx.getStorageSync("sessionId"))
     wx.request({
-      url: customerUrl + "/info",
+      url: customerUrl,
       header: {
         cookie: wx.getStorageSync("sessionId")
       },
@@ -89,26 +101,30 @@ Page({
         },
         success(res) {
           console.log(res)
-          const customer = wx.getStorageSync("customer")
-          customer.info = info
-          customer.isAllInfo = res.data
-          wx.setStorageSync("customer", customer)
+          wx.setStorageSync("isAllInfo", res.data)
           that.setData({
             info,
+            isAllInfo: res.data,
             shouldShowInfo: false,
             hasChange: false
           })
-          if (globalData.index && globalData.index.shouldCompleteInfo) wx.switchTab({
-            url: '/pages/index/index',
-          })
+          if (getApp().globalData.indexPage.shouldCompleteInfo) {
+            getApp().globalData.indexPage.shouldCompleteInfo = "completed"
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
+          }
         }
       })
     } else this.setData({
       shouldShowInfo: false
     }, () => {
-      if (globalData.index && globalData.index.shouldCompleteInfo) wx.switchTab({
-        url: '/pages/index/index',
-      })
+      if (getApp().globalData.indexPage.shouldCompleteInfo) {
+        getApp().globalData.indexPage.shouldCompleteInfo = "completed"
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+      }
     })
   }
 })

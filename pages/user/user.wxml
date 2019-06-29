@@ -11,17 +11,17 @@
     <image class="vip-image" src="{{vip.src}}"></image>{{vip.type}}
   </view>
 </view>
-<view wx:if="{{!shouldShowInput}}">
-  <view class="navigator" bindtap="updateInfo">
+<view wx:if="{{!shouldShowInfo}}">
+  <view class="navigator" bindtap="onChangeInfoShow">
     <image class="icon" src="/images/user/info.png"></image>
     <text class="user_points_tittle">我的信息</text> 
-    <text class="complete_tips" wx:if="{{!shouldShowInput}}">完善信息</text>
+    <text class="complete_tips" wx:if="{{!isAllInfo}}">完善信息</text>
   </view>
   <navigator open-type='switchTab' url="/pages/serviceList/serviceList">
     <image class="icon" src="/images/user/service.png"></image>
     我的服务
   </navigator>
-  <navigator url="/pages/order/order">
+  <navigator wx:if="{{false}}" url="/pages/order/order">
     <image class="icon" src="/images/user/order.png"></image>
     我的订单
   </navigator>
@@ -34,7 +34,7 @@
   </navigator>
 </view>
 
-<form wx:if="{{shouldShowInput}}" bindsubmit='onSubmit'>
+<form wx:if="{{shouldShowInfo}}" bindsubmit='onSubmit'>
   <view class="item">
     <image src="/images/user_info/company.png" class="item-icon"></image>
     企业全名
@@ -58,17 +58,17 @@
   <view class="item">
     <image src="/images/user_info/phone.png" class="item-icon"></image>
     电话
-    <input placeholder='未填写' bindinput="onInput" name="phone" type="number" value="{{info.phone||''}}" />
+    <input placeholder='请至少填写一项' bindinput="onInput" name="phone" type="number" value="{{info.phone||''}}" />
   </view>
   <view class="item">
     <image src="/images/user_info/weChat.png" class="item-icon"></image>
     微信
-    <input placeholder='未填写' bindinput="onInput" name="weChat" value="{{info.weChat||''}}" />
+    <input placeholder='请至少填写一项' bindinput="onInput" name="weChat" value="{{info.weChat||''}}" />
   </view>
   <view class="item">
     <image src="/images/user_info/dingTalk.png" class="item-icon"></image>
     钉钉
-    <input placeholder='未填写' bindinput="onInput" name="dingTalk" value="{{info.dingTalk||''}}" />
+    <input placeholder='请至少填写一项' bindinput="onInput" name="dingTalk" value="{{info.dingTalk||''}}" />
   </view>
   <button class="user-info-btn" form-type='submit'>{{hasChange?'保存':'返回'}}</button>
 </form>

@@ -1,3 +1,5 @@
+
+
 // pages/set_question/set_question.js
 const {
   serviceUrl,
@@ -136,6 +138,11 @@ Page({
       },
       success(res) {
         if (res.statusCode === 201) {
+          console.log(res.data)
+          console.log(res.data===null)
+          if(res.data===null){
+            wx.removeStorageSync("vip")
+          }
           wx.switchTab({
             url: '/pages/serviceList/serviceList',
           })

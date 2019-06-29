@@ -21,8 +21,8 @@
     <view class="single_info_content"></view>
   </view>
   <view class='single_info_content'>
-    <textarea wx:if="{{contract_type_checked!=='1'}}" name="detail" placeholder="请输入您的问题或需求" class="add_note"></textarea>
-    <view wx:if="{{contract_type_checked==='1'}}" class="upload_flie_wrapper">
+    <textarea wx:if="{{method!=='contract'||contract_type_checked!=='1'}}" name="detail" placeholder="请输入您的问题或需求" class="add_note"></textarea>
+    <view wx:if="{{method==='contract'&&contract_type_checked==='1'}}" class="upload_flie_wrapper">
       <view class="upload_flie_tittle text-center">上传文件</view>
       <view class="upload_flie_content">
         <button class="upload_flie_btn m-r" bindtap="onChooseFile">选择文件</button>

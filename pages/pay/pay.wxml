@@ -23,9 +23,3 @@
 
   <button bindtap="onPay" class="com-btn">立即支付</button>
 </view>
-<view wx:if="{{shouldPayContract}}" class="contract">
-  <image class="con-img" src="/images/pay/contract.png"></image>
-  <view class="con-service">{{service}}</view>
-  <view class="con-fee">{{totalFee/100}}元</view>
-  <button bindtap="onPay" class="con-btn">立即支付</button>
-</view>

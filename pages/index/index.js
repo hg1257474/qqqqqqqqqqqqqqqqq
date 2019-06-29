@@ -16,10 +16,17 @@ const setSessionId = (res) => {
         wx.setStorageSync(value.split("=")[0], JSON.parse(decodeURIComponent(value.match(/=([^;]+);/)[1])))
       }
     })
-  } else if (res.header["Set-Cookie"]) {
-    console.log(res.header["Set-Cookie"])
-    wx.setStorageSync("sessionId", res.header["Set-Cookie"].match(/EGG_SESS=([^;]+)/)[0])
-    wx.setStorageSync("vip", res.header["Set-Cookie"].match(/asd/))
+  } else {
+    for (let key in res.header) {
+      console.log(key.toLowerCase())
+      if (key.toLowerCase() === "set-cookie") {
+        const _temp = res.header[key]
+        if (_temp.includes("vip")) wx.setStorage("vip", JSON.parse(decodeURIComponent(_temp.match(/vip=([^;]+);/)[1])))
+        if (_temp.includes("isAllInfo")) wx.setStorage("isAllInfo", Boolean(_temp.match(/isAllInfo=([^;]+);/)[1]))
+        if (_temp.includes("EGG_SESS")) wx.setStorage("sessionId", _temp.match(/EGG_SESS=[^;]+/)[0])
+
+      }
+    }
   }
   console.log(wx.getStorageSync("sessionId"))
   console.log(wx.getStorageSync("vip"))
@@ -40,46 +47,45 @@ Page({
   },
   onShow() {
     // console.log(wx.getStorageSync("sessionId"))
-    const {
-      globalData
-    } = getApp()
-    let flag = true
-    if (globalData.index && globalData.index.shouldCompleteInfo) {
-      flag = false;
-      globalData.index = { ...globalData.index,
-        shouldCompleteInfo: false
-      }
-    }
-    if (flag && this.data.modal.show) this.setData({
+    if (getApp().globalData.indexPage.paymentCallback) delete getApp().globalData.indexPage.paymentCallback
+    if (getApp().globalData.indexPage.shouldCompleteInfo) {
+      this.onCommunication()
+      delete getApp().globalData.indexPage.shouldCompleteInfo
+    } else this.setData({
       modal: {
         category: null,
         service: null,
         show: false
       }
     });
+
   },
   onReady() {
     const that = this
     const indexPage = wx.getStorageSync("indexPage") || {
-      timestamp: null
+      expires: null
     }
     let sessionId = wx.getStorageSync("sessionId")
     wx.login({
       success: function(res) {
         wx.request({
           header: {
-            cookie: sessionId
+            cookie: sessionId,
+            "if-modified-since": indexPage.expires
           },
-          url: `${staticUrl}/indexPage?timestamp=${indexPage.timestamp}&jsCode=${res.code}`,
+          url: `${staticUrl}/indexPage?jsCode=${res.code}`,
           success: function(res) {
-            console.log(res)
+            // console.log(res)
             setSessionId(res)
             if (res.statusCode === 304) {
               that.setData({
-                indexPage: indexPage
+                indexPage: indexPage.content
               })
             } else {
-              wx.setStorageSync("indexPage", res.data)
+              wx.setStorageSync("indexPage", {
+                content: res.data,
+                expires: res.header["Expires"]
+              })
               that.setData({
                 indexPage: res.data
               })
@@ -181,18 +187,21 @@ Page({
     console.log("contract")
     console.log(this.data)
     const category = this.data.indexPage[this.data.modal.category][1]
-    const target = this.data.indexPage[this.data.modal.category][3][this.data.modal.service][1]
+    const target = this.data.modal.name
     wx.navigateTo({
       url: `/pages/submitService/submitService?category=${category}&target=${target}&method=contract&contract_type_checked=1`
     })
   },
   onCommunication: function(e) {
+    console.log(this.data)
+    const category = this.data.indexPage[this.data.modal.category][1]
+    const target = this.data.modal.name
     // console.log(getApp())
     const that = this
     // console.log(wx.getStorageSync("customer"))
-    if (wx.getStorageSync("customer").isAllInfo) {
-      if (wx.getStorageSync("customer").vip.kind !== "普通" || wx.getStorageSync("fake")) wx.navigateTo({
-        url: `/pages/question/question?category=${this.data.modal.category}&name=${this.data.modal.service}&type=0`
+    if (wx.getStorageSync("isAllInfo")) {
+      if (wx.getStorageSync("vip")) wx.navigateTo({
+        url: `/pages/submitService/submitService?category=${category}&target=${target}&method=communication`
       })
       else wx.showModal({
         title: '您不是会员',
@@ -203,16 +212,9 @@ Page({
         cancelColor: 'gray',
         success(res) {
           if (res.confirm) {
-            // console.log('用户点击确定')
-            let index = getApp().globalData.index || {}
-            getApp().globalData.index = {
-              ...index,
-              callback: () => {
-                wx.navigateTo({
-                  url: `/pages/question/question?category=${that.data.modal.category}&name=${that.data.modal.service}&type=0`
-                })
-              }
-            }
+            getApp().globalData.indexPage.paymentCallback = () => wx.navigateTo({
+              url: `/pages/submitService/submitService?category=${category}&target=${target}&method=communication`
+            })
             wx.navigateTo({
               url: `/pages/pay/pay`
             })
@@ -226,13 +228,7 @@ Page({
         icon: "none"
       });
       setTimeout(() => {
-        const {
-          globalData
-        } = getApp()
-        globalData.index = {
-          ...globalData.index,
-          shouldCompleteInfo: true
-        }
+        getApp().globalData.indexPage.shouldCompleteInfo = true
         wx.switchTab({
           url: '/pages/user/user',
         })
