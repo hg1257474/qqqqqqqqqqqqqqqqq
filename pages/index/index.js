@@ -7,30 +7,16 @@ const {
 const setSessionId = (res) => {
   console.log(res)
   console.log(res.cookies)
-  if (res.cookies) {
-    res.cookies.forEach(value => {
-      if (value.includes("EGG_SESS")) {
-        wx.setStorageSync("sessionId", value.split(";")[0])
-      } else {
-        console.log(value.match(/=([^;]+);/)[1])
-        wx.setStorageSync(value.split("=")[0], JSON.parse(decodeURIComponent(value.match(/=([^;]+);/)[1])))
-      }
-    })
-  } else {
+  if (res.cookies&&res.cookies.length) wx.setStorageSync("sessionId", res.cookies[0].split(";")[0])
+  else {
     for (let key in res.header) {
       console.log(key.toLowerCase())
       if (key.toLowerCase() === "set-cookie") {
         const _temp = res.header[key]
-        if (_temp.includes("vip")) wx.setStorage("vip", JSON.parse(decodeURIComponent(_temp.match(/vip=([^;]+);/)[1])))
-        if (_temp.includes("isAllInfo")) wx.setStorage("isAllInfo", Boolean(_temp.match(/isAllInfo=([^;]+);/)[1]))
-        if (_temp.includes("EGG_SESS")) wx.setStorage("sessionId", _temp.match(/EGG_SESS=[^;]+/)[0])
-
+        wx.setStorageSync("sessionId", _temp.match(/EGG_SESS=[^;]+/)[0])
       }
     }
   }
-  console.log(wx.getStorageSync("sessionId"))
-  console.log(wx.getStorageSync("vip"))
-  console.log(wx.getStorageSync("isAllInfo"))
 }
 Page({
   data: {
@@ -61,11 +47,15 @@ Page({
 
   },
   onReady() {
+    console.log(wx.getStorageSync("indexPage"))
+    console.log(wx.getStorageSync("isAllInfo"))
+    console.log(wx.getStorageSync("vip"))
     const that = this
     const indexPage = wx.getStorageSync("indexPage") || {
       expires: null
     }
     let sessionId = wx.getStorageSync("sessionId")
+    //console.log(sessionId, indexPage)
     wx.login({
       success: function(res) {
         wx.request({
@@ -77,17 +67,21 @@ Page({
           success: function(res) {
             // console.log(res)
             setSessionId(res)
+            if (res.data && 'vip' in res.data) {
+              wx.setStorageSync("isAllInfo", res.data.isAllInfo)
+              wx.setStorageSync("vip", res.data.vip)
+            }
             if (res.statusCode === 304) {
               that.setData({
                 indexPage: indexPage.content
               })
             } else {
               wx.setStorageSync("indexPage", {
-                content: res.data,
+                content: res.data.indexPage,
                 expires: res.header["Expires"]
               })
               that.setData({
-                indexPage: res.data
+                indexPage: res.data.indexPage
               })
             };
           }

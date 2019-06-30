@@ -38,11 +38,11 @@ Page({
           })
         } else {
           wx.setStorageSync("payPage", {
-            content: res.data,
+            content: res.data.payPage,
             expires: res.header["Expires"]
           })
           that.setData({
-            payPage: res.data
+            payPage: res.data.payPage
           })
         };
       }
