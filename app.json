@@ -7,9 +7,10 @@
     "pages/serviceList/serviceList",
     "pages/submitService/submitService",
     "pages/pay/pay",
-    "pages/order/order",
+    "pages/order_list/order_list",
     "template/modal/modal",
-    "pages/fileUpload/fileUpload"
+    "pages/fileUpload/fileUpload",
+    "pages/download/download"
   ],
   "permission": {
     "scope.userLocation": {

@@ -1,20 +1,27 @@
-// pages/order/order.js
+// pages/download/download.js
+const {DOWNLOAD_PAGE_URL}=require('../../utils/config.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    orders: [
-      ['但使东山谢安石', '3.00', '2019年1月3日 20:32:01']
-    ]
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    let url = DOWNLOAD_PAGE_URL + "?"
+    for (let key in options) {
+      url += `${key}=${options[key]}&`
+    }
+    url=url.slice(0,-1)
+    console.log(url)
+    this.setData({
+      src: url
+    })
   },
 
   /**
@@ -64,10 +71,5 @@ Page({
    */
   onShareAppMessage: function() {
 
-  },
-  ontap:function(){
-    wx.navigateBack({
-      delta:1
-    })
   }
 })

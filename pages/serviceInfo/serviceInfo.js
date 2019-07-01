@@ -67,13 +67,16 @@ Page({
     const index = e.currentTarget.dataset.index
     const type = this.data.description[index][0].slice(-4).includes(".") ? this.data.description[index][0].slice(-3) : this.data.description[index][0].slice(-4)
     console.log(type)
+    const url = `${serviceUrl}/description/file/data?serviceId=${serviceId}&index=${index}`
+    console.log(url)
     if (["png", "jpg", "gif"].includes(type)) {
       wx.previewImage({
-        urls: [`${serviceFileUrl}/file/${index}`]
+        urls: [url]
+        ,complete(res){console.log(res)}
       })
     } else {
       wx.downloadFile({
-        url: `${serviceFileUrl}/file/${index}`,
+        url: url,
         success(res) {
           console.log(res)
           wx.openDocument({
@@ -85,21 +88,8 @@ Page({
     }
   },
   onDownloadFile(e) {
-    const index = e.currentTarget.dataset.index
-    wx.downloadFile({
-      url: `${serviceFileUrl}/file/${index}`,
-      success(res) {
-        const fileSystemManager = wx.getFileSystemManager()
-        fileSystemManager.saveFileSync(res.tempFilePath)
-        /*
-        FileSystemManager.saveFile({
-          tempFilePath:res.tempFilePath,
-          complete(res){
-            console.log(res)
-          }
-        })
-        */
-      }
+    wx.navigateTo({
+      url: `/pages/download/download?serviceId=${serviceId}&target=description&index=${e.currentTarget.dataset.index}`
     })
   },
   /**
@@ -129,55 +119,64 @@ Page({
     console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
   // 评级打分
-  score_1: function(e) {
-    var that = this;
-    for (var i = 0; i < that.data.stars1.length; i++) {
-      var allItem = 'stars1[' + i + '].flag';
-      that.setData({
-        [allItem]: 1
-      })
-    }
-    var index = e.currentTarget.dataset.index;
-    for (var i = 0; i <= index; i++) {
-      var item = 'stars1[' + i + '].flag';
-      that.setData({
-        [item]: 2
-      })
-    }
+  onRate1: function(e) {
+    console.log(e)
+    console.log(this.data)
+    const comment = this.data.comment.map(item => item)
+    comment[0] = e.currentTarget.dataset.index
+    this.setData({
+      "comment[0]": e.currentTarget.dataset.index
+    })
   },
   // 评级打分
-  score_2: function(e) {
-    var that = this;
-    for (var i = 0; i < that.data.stars2.length; i++) {
-      var allItem = 'stars2[' + i + '].flag';
-      that.setData({
-        [allItem]: 1
-      })
-    }
-    var index = e.currentTarget.dataset.index;
-    for (var i = 0; i <= index; i++) {
-      var item = 'stars2[' + i + '].flag';
-      that.setData({
-        [item]: 2
-      })
-    }
+  onRate2: function(e) {
+    console.log(e)
+    console.log(this.data)
+    const comment = this.data.comment.map(item => item)
+    comment[1] = e.currentTarget.dataset.index
+    this.setData({
+      "comment[1]": e.currentTarget.dataset.index
+    })
+
   },
   // 评级打分
-  score_3: function(e) {
-    var that = this;
-    for (var i = 0; i < that.data.stars3.length; i++) {
-      var allItem = 'stars3[' + i + '].flag';
-      that.setData({
-        [allItem]: 1
-      })
-    }
-    var index = e.currentTarget.dataset.index;
-    for (var i = 0; i <= index; i++) {
-      var item = 'stars3[' + i + '].flag';
-      that.setData({
-        [item]: 2
-      })
-    }
+  onRate3: function(e) {
+    console.log(e)
+    console.log(this.data)
+    const comment = this.data.comment.map(item => item)
+    comment[2] = e.currentTarget.dataset.index
+    this.setData({
+      "comment[2]": e.currentTarget.dataset.index
+    })
+  },
+  onMakeCommentDetail(e) {
+    console.log(e)
+    console.log(e.detail.value)
+    this.setData({
+      "comment[3]": e.detail.value
+    })
+  },
+  onMakeComment() {
+    const that = this
+    console.log(serviceUrl)
+    console.log(this.data.comment)
+    wx.request({
+      url: serviceUrl + "/" + serviceId + "/comment",
+      method: "PUT",
+      data: this.data.comment,
+      success() {
+        wx.request({
+          url: serviceUrl + "/" + serviceId,
+          header: {
+            cookie: wx.getStorageSync("sessionId")
+          },
+          success(res) {
+            res.data.isTextDescriptionType = typeof res.data.description === 'string'
+            that.setData(res.data)
+          }
+        })
+      }
+    })
   },
   onChangeDescriptionShow() {
     this.setData({

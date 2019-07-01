@@ -71,7 +71,7 @@ Page({
     })
   },
   onShow() {
-    this.onLoad()
+    // this.onLoad()
     const that = this
     if (tempFileId) {
       wx.request({

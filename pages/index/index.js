@@ -7,7 +7,7 @@ const {
 const setSessionId = (res) => {
   console.log(res)
   console.log(res.cookies)
-  if (res.cookies&&res.cookies.length) wx.setStorageSync("sessionId", res.cookies[0].split(";")[0])
+  if (res.cookies && res.cookies.length) wx.setStorageSync("sessionId", res.cookies[0].split(";")[0])
   else {
     for (let key in res.header) {
       console.log(key.toLowerCase())
@@ -56,6 +56,7 @@ Page({
     }
     let sessionId = wx.getStorageSync("sessionId")
     //console.log(sessionId, indexPage)
+    
     wx.login({
       success: function(res) {
         wx.request({
@@ -65,23 +66,26 @@ Page({
           },
           url: `${staticUrl}/indexPage?jsCode=${res.code}`,
           success: function(res) {
-            // console.log(res)
+            console.log(res.data)
             setSessionId(res)
             if (res.data && 'vip' in res.data) {
               wx.setStorageSync("isAllInfo", res.data.isAllInfo)
               wx.setStorageSync("vip", res.data.vip)
             }
-            if (res.statusCode === 304) {
-              that.setData({
-                indexPage: indexPage.content
-              })
-            } else {
+            if (res.data && res.data.indexPage) {
+              console.log(222)
               wx.setStorageSync("indexPage", {
                 content: res.data.indexPage,
                 expires: res.header["Expires"]
               })
               that.setData({
                 indexPage: res.data.indexPage
+              })
+
+            } else {
+              console.log(111)
+              that.setData({
+                indexPage: indexPage.content
               })
             };
           }

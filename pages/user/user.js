@@ -26,7 +26,8 @@ Page({
   },
   onReady() {
     this.setData({
-      isAllInfo: wx.getStorageSync("isAllInfo")
+      isAllInfo: wx.getStorageSync("isAllInfo"),
+      score:wx.getStorageSync("score")
     })
   },
   onShow() {
