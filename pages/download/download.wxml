@@ -1,2 +1,2 @@
 <!--pages/download/download.wxml-->
-<web-view src="{{src}}"></web-view>
+<web-view src="{{'http://desk.zol.com.cn/bizhi/7576_94021_2.html'}}"></web-view>

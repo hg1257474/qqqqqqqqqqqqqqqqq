@@ -1,4 +1,4 @@
-const url = "http://192.168.0.29:7001"//"http://www.huishenghuo.net:7001"
+const url = "http://localhost:7001"//"http://www.huishenghuo.net:7001"
 
 exports.accountUrl = url + "/account"
 exports.loginUrl = url + "/customer/login"
