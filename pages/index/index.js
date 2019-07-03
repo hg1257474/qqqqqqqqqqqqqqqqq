@@ -35,7 +35,7 @@ Page({
     // console.log(wx.getStorageSync("sessionId"))
     if (getApp().globalData.indexPage.paymentCallback) delete getApp().globalData.indexPage.paymentCallback
     if (getApp().globalData.indexPage.shouldCompleteInfo) {
-      this.onCommunication()
+      if (getApp().globalData.indexPage.shouldCompleteInfo==="complete") this.onCommunication()
       delete getApp().globalData.indexPage.shouldCompleteInfo
     } else this.setData({
       modal: {

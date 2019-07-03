@@ -111,8 +111,8 @@
   position: absolute;
   width: 5rpx;
   height: 27rpx;
-  left: 19rpx;
-  top: 8rpx;
+  left: 19.5rpx;
+  top: 9rpx;
 }
 
 .to-talk::after {
@@ -121,6 +121,6 @@
   position: absolute;
   width: 27rpx;
   height: 5rpx;
-  left: 8rpx;
+  left: 9rpx;
   top: 19rpx;
 }

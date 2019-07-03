@@ -27,7 +27,7 @@ Page({
   onReady() {
     this.setData({
       isAllInfo: wx.getStorageSync("isAllInfo"),
-      score:wx.getStorageSync("score")
+      score: wx.getStorageSync("score")
     })
   },
   onShow() {
@@ -110,22 +110,25 @@ Page({
             hasChange: false
           })
           if (getApp().globalData.indexPage.shouldCompleteInfo) {
-            getApp().globalData.indexPage.shouldCompleteInfo = "completed"
+           // getApp().globalData.indexPage.shouldCompleteInfo = "completed"
             wx.switchTab({
               url: '/pages/index/index',
             })
           }
         }
       })
-    } else this.setData({
-      shouldShowInfo: false
-    }, () => {
-      if (getApp().globalData.indexPage.shouldCompleteInfo) {
-        getApp().globalData.indexPage.shouldCompleteInfo = "completed"
-        wx.switchTab({
-          url: '/pages/index/index',
-        })
-      }
-    })
+    } else {
+
+      this.setData({
+        shouldShowInfo: false
+      }, () => {
+        if (getApp().globalData.indexPage.shouldCompleteInfo) {
+          getApp().globalData.indexPage.shouldCompleteInfo = "completed"
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+        }
+      })
+    }
   }
 })
