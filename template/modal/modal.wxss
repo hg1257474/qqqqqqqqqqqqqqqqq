@@ -29,8 +29,8 @@ icon{
   width:7.07vw;
   
   height:7.07vw;
-  top:-3vw;
-  right:-3vw;
+  top:1.4vw;
+  right:1.3vw;
 }
 .icon {
   width: 16vw;
@@ -64,6 +64,7 @@ icon{
   display:inline-block;
   color:white;
   height: 6.67vw;
+  line-height:6.67vw;
   border-radius: 3.33vw;
   margin-top:5.87vw;
 }

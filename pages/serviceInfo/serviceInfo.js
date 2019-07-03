@@ -72,7 +72,7 @@ Page({
     if (["png", "jpg", "gif"].includes(type)) {
       wx.previewImage({
         urls: [url]
-        ,complete(res){console.log(res)}
+        ,complete(res){console.log("22");console.log(res)}
       })
     } else {
       wx.downloadFile({
@@ -88,6 +88,7 @@ Page({
     }
   },
   onDownloadFile(e) {
+    console.log(111)
     wx.navigateTo({
       url: `/pages/download/download?serviceId=${serviceId}&target=description&index=${e.currentTarget.dataset.index}`
     })

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/fileUpload/fileUpload",
     "pages/serviceInfo/serviceInfo",
     "pages/user/user",
     "pages/order_info/order_info",
@@ -9,7 +10,6 @@
     "pages/pay/pay",
     "pages/order_list/order_list",
     "template/modal/modal",
-    "pages/fileUpload/fileUpload",
     "pages/download/download"
   ],
   "permission": {
