@@ -93,8 +93,8 @@
 .to-talk {
   border-radius: 50%;
   background-color: rgb(187, 187, 187);
-  width: 43rpx;
-  height: 43rpx;
+  width: 5.73vw;
+  height: 5.73vw;
   margin-left: 265rpx;
   position: absolute;
   right: 1vw;
@@ -109,18 +109,18 @@
   content: "";
   background-color: rgb(255, 255, 255);
   position: absolute;
-  width: 5rpx;
-  height: 27rpx;
-  left: 19.5rpx;
-  top: 9rpx;
+  width: 0.67vw;
+  height: 3.6vw;
+  left: 2.53vw;
+  top: 1.065vw;
 }
 
 .to-talk::after {
   content: "";
   background-color: rgb(255, 255, 255);
   position: absolute;
-  width: 27rpx;
-  height: 5rpx;
-  left: 9rpx;
-  top: 19rpx;
+  width: 3.6vw;
+  height: 0.67vw;
+  left: 1.065vw;
+  top: 2.53vw;
 }

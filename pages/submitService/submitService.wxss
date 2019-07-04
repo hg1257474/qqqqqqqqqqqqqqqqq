@@ -8,6 +8,7 @@
 }
 
 .single_info_wrapper .single_info_tittle_img {
+  padding-left: 0.5em;
   width: 30px;
   height: 30px;
   margin-right: 1vw;
@@ -31,7 +32,9 @@
   align-items: center;
   padding-left: 4vw;
 }
-
+.text-file-container{
+  padding-top:5vw;
+}
 .single_info_content .add_note {
   width: 85%;
   padding: 15px;
@@ -39,6 +42,7 @@
   color: #898989;
   border: 1px solid #e0e0e0;
   margin: 10px auto;
+  margin-top: 0;
 }
 
 .single_info_content .add_note::placeholder {

@@ -7,7 +7,10 @@ const {
 const setSessionId = (res) => {
   console.log(res)
   console.log(res.cookies)
-  if (res.cookies && res.cookies.length) wx.setStorageSync("sessionId", res.cookies[0].split(";")[0])
+  if (res.cookies && res.cookies.length) {
+    if (res.cookies[0].value) wx.setStorageSync("sessionId", `EGG_SESS=${res.cookies[0].value}`)
+    else wx.setStorageSync("sessionId", res.cookies[0].split(";")[0])
+  }
   else {
     for (let key in res.header) {
       console.log(key.toLowerCase())
