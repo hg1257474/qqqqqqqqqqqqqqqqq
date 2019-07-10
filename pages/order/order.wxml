@@ -1,0 +1,7 @@
+<!--pages/order/order.wxml-->
+<view wx:for="{{orders}}" wx:key="{{index}}" class="container">
+  <view class="name">{{item[0]}}</view>
+
+  <view class="date">{{item[1]}}</view>
+  <view class="fee">{{item[2]}}</view>
+</view>

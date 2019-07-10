@@ -1,8 +1,7 @@
 // pages/user/user.js
 const {
-  customerUrl: _customerUrl
+  customerUrl
 } = require("../../utils/config.js")
-let customerUrl = _customerUrl + "/info"
 //const vips = ["普通", "月度", "年度"]
 Page({
 
@@ -10,30 +9,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shouldShowInfo: false,
+    shouldShowInput: false,
     hasChange: false,
     franchiseModes: ['纯直营', '开放他人加盟', '加盟他人'],
     vip: {
       src: "/images/user/vip_normal.png",
       type: "普通会员"
     },
-    user_points: 2000,
-  },
-  onHide() {
-    if (getApp().globalData.indexPage.shouldCompleteInfo && getApp().globalData.indexPage.shouldCompleteInfo !== "completed") {
-      delete getApp().globalData.indexPage.shouldCompleteInfo
-    }
-  },
-  onReady() {
-    this.setData({
-      isAllInfo: wx.getStorageSync("isAllInfo"),
-      score: wx.getStorageSync("score")
-    })
+    user_points:2000,
   },
   onShow() {
-    // console.log(getApp().globalData.indexPage.shouldCompleteInfo)
-    if (getApp().globalData.indexPage.shouldCompleteInfo) {
-      this.onChangeInfoShow()
+    const {
+      globalData
+    } = getApp()
+    if (globalData.index && globalData.index.shouldCompleteInfo) {
+      this.updateInfo()
     }
     this.getUserVip();
   },
@@ -44,11 +34,13 @@ Page({
   },
   getUserVip() {
     const initialization = () => {
-      const vip = wx.getStorageSync("vip")
-      if (vip && vip.kind) this.setData({
+      console.log(wx.getStorageSync("customer"))
+      const vip = wx.getStorageSync("customer").vip
+      console.log(vip)
+      this.setData({
         vip: {
           src: `../../images/user/vip${vip ? "_normal" : "_normal"}.png`,
-          type: `${vip.kind==="month"?'月度':'年度'}会员`
+          type: vip.kind + "会员"
         }
       })
     }
@@ -60,25 +52,30 @@ Page({
       "info.franchiseMode": e.detail
     })
   },
-  onChangeInfoShow() {
-    if (this.data.info) {
+  updateInfo() {
+    let info = wx.getStorageSync("customer").info
+    if (info) {
       this.setData({
-        shouldShowInfo: true,
+        shouldShowInput: true,
+        info
       })
       return
     }
     const that = this
-    console.log(wx.getStorageSync("sessionId"))
     wx.request({
       url: customerUrl,
       header: {
-        cookie: wx.getStorageSync("sessionId")
+        cookie: wx.getStorageSync("sessionId").raw
       },
       method: "GET",
       success(res) {
+        info = res.data
+        const customer = wx.getStorageSync("customer")
+        customer.info = info
+        wx.setStorageSync("customer", customer)
         that.setData({
-          shouldShowInfo: true,
-          info: res.data
+          shouldShowInput: true,
+          info
         })
       }
     })
@@ -98,37 +95,30 @@ Page({
         method: "PUT",
         data: info,
         header: {
-          cookie: wx.getStorageSync("sessionId")
+          cookie: wx.getStorageSync("sessionId").raw
         },
         success(res) {
           console.log(res)
-          wx.setStorageSync("isAllInfo", res.data)
+          const customer = wx.getStorageSync("customer")
+          customer.info = info
+          customer.isAllInfo = res.data
+          wx.setStorageSync("customer", customer)
           that.setData({
             info,
-            isAllInfo: res.data,
-            shouldShowInfo: false,
+            shouldShowInput: false,
             hasChange: false
           })
-          if (getApp().globalData.indexPage.shouldCompleteInfo) {
-           // getApp().globalData.indexPage.shouldCompleteInfo = "completed"
-            wx.switchTab({
-              url: '/pages/index/index',
-            })
-          }
-        }
-      })
-    } else {
-
-      this.setData({
-        shouldShowInfo: false
-      }, () => {
-        if (getApp().globalData.indexPage.shouldCompleteInfo) {
-          getApp().globalData.indexPage.shouldCompleteInfo = "completed"
-          wx.switchTab({
+          if (globalData.index && globalData.index.shouldCompleteInfo) wx.switchTab({
             url: '/pages/index/index',
           })
         }
       })
-    }
+    } else this.setData({
+      shouldShowInput: false
+    }, () => {
+      if (globalData.index && globalData.index.shouldCompleteInfo) wx.switchTab({
+        url: '/pages/index/index',
+      })
+    })
   }
 })

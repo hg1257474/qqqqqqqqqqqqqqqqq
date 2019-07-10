@@ -1,0 +1,215 @@
+<view class="main p-t">
+<navigator url="/pages/set_question/set_question">发起合同</navigator>
+<navigator url="/pages/question_deal/question_deal">处理订单</navigator>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_order_state.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">订单状态</text>
+    <view class="single_info_content">
+      <text class="contract_type">{{order_state}}</text>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_hetong.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">合同类型</text>
+    <view class="single_info_content">
+      <text class="contract_type">{{contract_type}}</text>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_note.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">需求描述</text>
+    <view class="single_info_content single_info_content_right" bindtap="hide_user_note" data-state="{{hide_user_note}}">
+      <image src="/images/set_question/{{hide_user_note === true ? 'set_question_icon_down.png' : 'set_question_icon_up.png'}}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  
+  <view class='single_info_content'>
+    <view class="add_note"  wx:if="{{hide_user_note}}">{{question_note}}</view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_lx_type.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">选择沟通方式</text>
+    <view class="single_info_content">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio_label" wx:for-items="{{items}}" wx:key="name">
+          <image src="/images/set_question/{{item.name === radioCheckVal ? item.src : item.checked_src}}" class="radio_img"></image>
+          <radio class="radio" value="{{item.name}}" checked="{{item.checked}}"></radio>
+          <text>{{item.value}}</text>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_info.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">老板信息</text>
+    <view class="single_info_content single_info_content_right"  bindtap="hide_user_info" data-state="{{hide_user_info}}">
+      <image src="/images/set_question/{{hide_user_info === true ? 'set_question_icon_down.png' : 'set_question_icon_up.png'}}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view class="single_info_content" wx:if="{{hide_user_info}}">
+    
+    <view class="single_user_data">
+      <view class="user_name">联系人</view>
+      <view class="user_wirte_wrapper">
+        {{user_info['name']}}
+      </view>    
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">电话</view>    
+      <view class="user_wirte_wrapper">
+      {{user_info['call']}}
+      </view>    
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">微信</view>    
+      <view class="user_wirte_wrapper">
+      {{user_info['vw']}}
+      </view>    
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">钉钉</view>    
+      <view class="user_wirte_wrapper">
+        {{user_info['dingding']}}
+      </view>    
+    </view>
+
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_price.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">给客户报价</text>
+    <view class="single_info_content">
+      {{submit_price}}
+      <text>元</text>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_pay_state.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">支付状态</text>
+    <view class="single_info_content">
+      {{pay_state}}
+      <button class="pay_now">去付款</button>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_lawer_card.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">律师名片</text>
+    <view class="single_info_content single_info_content_right"  bindtap="hide_lawer_card" data-state="{{hide_lawer_card}}">
+      <image src="/images/set_question/{{hide_lawer_card === true ? 'set_question_icon_down.png' : 'set_question_icon_up.png'}}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view class="single_info_content lawer_info_wrapper" wx:if="{{hide_lawer_card}}">
+    <view class="lawer_img_wrapper">
+      <image src="/images/set_question/lawer_img.jpg" class="lawer_img"></image>
+    </view>
+    <view class="lawer_info_content">
+      <view class="single_user_data">
+        <view class="user_name">姓名</view>
+        <view class="user_wirte_wrapper">
+          {{lawer_info['name']}}
+        </view>    
+      </view>
+
+      <view class="single_user_data">
+        <view class="user_name">服务客户</view>    
+        <view class="user_wirte_wrapper">
+        {{lawer_info['service_num']}}单
+        </view>    
+      </view>
+
+      <view class="single_user_data">
+        <view class="user_name">总体评分</view>    
+        <view class="user_wirte_wrapper">
+        {{lawer_info['points']}}分
+        </view>    
+      </view>
+
+      <view class="single_user_data">
+        <view class="user_name">专长</view>    
+        <view class="user_wirte_wrapper">
+          {{lawer_info['good_at']}}
+        </view>    
+      </view>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/set_question/set_question_evaluate.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">评价</text>
+    <view class="single_info_content single_info_content_right"  bindtap="hide_evaluate" data-state="{{hide_evaluate}}">
+      <image src="/images/set_question/{{hide_evaluate === true ? 'set_question_icon_down.png' : 'set_question_icon_up.png'}}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view class="single_info_content" wx:if="{{hide_evaluate}}">
+    
+    <view class="single_user_data single_evaluate_data">
+      <view class="user_name evaluate_tittle_w">
+        <view class="evaluate_icon_w">
+          <image src="/images/set_question/set_question_evaluate_1.png" class="evaluate_icon"></image>
+        </view>
+        <text class="evaluate_tittle">问题解决程度</text>
+      </view>
+      <view class="user_wirte_wrapper evaluate_content">
+        <view wx:for="{{stars1}}" wx:key="" data-index="{{index}}" bindtap='score_1' class="strat_view">
+          <image src="{{item.flag==1?item.bgImg:item.bgfImg}}" class="strat_view_img"></image>
+        </view>
+      </view>    
+    </view>
+
+    <view class="single_user_data single_evaluate_data">
+      <view class="user_name evaluate_tittle_w">
+        <view class="evaluate_icon_w">
+          <image src="/images/set_question/set_question_evaluate_2.png" class="evaluate_icon"></image>
+        </view>
+        <text class="evaluate_tittle">问题回复速度</text>
+      </view>
+      <view class="user_wirte_wrapper evaluate_content">
+        <view wx:for="{{stars2}}" wx:key="" data-index="{{index}}" bindtap='score_2' class="strat_view">
+          <image src="{{item.flag==1?item.bgImg:item.bgfImg}}" class="strat_view_img"></image>
+        </view>
+      </view>    
+    </view>
+
+    <view class="single_user_data single_evaluate_data">
+      <view class="user_name evaluate_tittle_w">
+        <view class="evaluate_icon_w">
+          <image src="/images/set_question/set_question_evaluate_3.png" class="evaluate_icon"></image>
+        </view>
+        <text class="evaluate_tittle">总体满意程度</text>
+      </view>
+      <view class="user_wirte_wrapper evaluate_content">
+        <view wx:for="{{stars3}}" wx:key="" data-index="{{index}}" bindtap='score_3' class="strat_view">
+          <image src="{{item.flag==1?item.bgImg:item.bgfImg}}" class="strat_view_img"></image>
+        </view>
+      </view>    
+    </view>
+
+    <view class="single_user_data single_evaluate_data">
+      <view class="user_name evaluate_tittle_w">
+        <view class="evaluate_icon_w">
+          <image src="/images/set_question/set_question_evaluate_4.png" class="evaluate_icon"></image>
+        </view>
+        <text class="evaluate_tittle">详细评价意见</text>
+      </view>
+      <view class="user_wirte_wrapper evaluate_content">
+      </view>    
+    </view>
+    <view class="single_user_data_content">
+      <textarea name="" placeholder="请输入您的详细评价意见" class="add_advise"></textarea>
+    </view>
+
+  </view>
+
+  <button class="submit_evaluate">提交</button>
+
+</view>

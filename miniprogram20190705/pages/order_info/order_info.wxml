@@ -1,9 +1,0 @@
-<!--pages/order_info/order_info.wxml-->
-<view class="name">{{name}}</view>
-<view class="left">订单金额:</view>
-<view class="right">{{fee}}</view>
-<view class="left">交易时间:</view>
-<view class="right">{{date}}</view>
-<view class="left">备注:</view>
-<view class="right">{{remark}}
-</view>

@@ -1,33 +1,23 @@
 //index.js
 const {
+  categories,
+  servicesGroup
+} = require('./other')
+const {
   url,
-  staticUrl
+  cacheUrl
 } = require("../../utils/config.js")
+const {
+  myGetStorage
+} = require('../../utils/storage.js')
 // console.log(getApp())
-const setSessionId = (res) => {
-  console.log(res)
-  console.log(res.cookies)
-  if (res.cookies && res.cookies.length) {
-    if (res.cookies[0].value) wx.setStorageSync("sessionId", `EGG_SESS=${res.cookies[0].value}`)
-    else wx.setStorageSync("sessionId", res.cookies[0].split(";")[0])
-  }
-  else {
-    for (let key in res.header) {
-      console.log(key.toLowerCase())
-      if (key.toLowerCase() === "set-cookie") {
-        const _temp = res.header[key]
-        wx.setStorageSync("sessionId", _temp.match(/EGG_SESS=[^;]+/)[0])
-      }
-    }
-  }
-}
 Page({
   data: {
     modal: {
       category: null,
       service: null,
       show: false,
-      currentTab: 0, // swichNav切换
+      currentTab: 0, 					// swichNav切换
     },
     category: 0,
     categories: undefined,
@@ -36,65 +26,244 @@ Page({
   },
   onShow() {
     // console.log(wx.getStorageSync("sessionId"))
-    if (getApp().globalData.indexPage.paymentCallback) delete getApp().globalData.indexPage.paymentCallback
-    if (getApp().globalData.indexPage.shouldCompleteInfo) {
-      if (getApp().globalData.indexPage.shouldCompleteInfo==="complete") this.onCommunication()
-      delete getApp().globalData.indexPage.shouldCompleteInfo
-    } else this.setData({
+    const {
+      globalData
+    } = getApp()
+    let flag = true
+    if (globalData.index && globalData.index.shouldCompleteInfo) {
+      flag = false;
+      globalData.index = { ...globalData.index,
+        shouldCompleteInfo: false
+      }
+    }
+    if (flag && this.data.modal.show) this.setData({
       modal: {
         category: null,
         service: null,
         show: false
       }
     });
-
   },
   onReady() {
-    console.log(wx.getStorageSync("indexPage"))
-    console.log(wx.getStorageSync("isAllInfo"))
-    console.log(wx.getStorageSync("vip"))
     const that = this
     const indexPage = wx.getStorageSync("indexPage") || {
-      expires: null
+      timestamp: null
     }
-    let sessionId = wx.getStorageSync("sessionId")
-    //console.log(sessionId, indexPage)
-    
-    wx.login({
+    wx.request({
+      url: cacheUrl,
+      data: {
+        type: "indexPage",
+        timestamp: indexPage.timestamp
+      },
       success: function(res) {
-        wx.request({
-          header: {
-            cookie: sessionId,
-            "if-modified-since": indexPage.expires
+        let back_data = [
+          {
+            "icon": "../../images/index/index_left_icon_1.png",
+            "tittle": "主体设立",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part":[
+              {
+                "icon": "../../images/index/index_right_icon_1.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_1.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_1.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
           },
-          url: `${staticUrl}/indexPage?jsCode=${res.code}`,
-          success: function(res) {
-            console.log(res.data)
-            setSessionId(res)
-            if (res.data && 'vip' in res.data) {
-              wx.setStorageSync("isAllInfo", res.data.isAllInfo)
-              wx.setStorageSync("vip", res.data.vip)
-            }
-            if (res.data && res.data.indexPage) {
-              console.log(222)
-              wx.setStorageSync("indexPage", {
-                content: res.data.indexPage,
-                expires: res.header["Expires"]
-              })
-              that.setData({
-                indexPage: res.data.indexPage
-              })
-
-            } else {
-              console.log(111)
-              that.setData({
-                indexPage: indexPage.content
-              })
-            };
-          }
+          {
+            "icon": "../../images/index/index_left_icon_2.png",
+            "tittle": "合      同",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_2.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_2.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_2.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_3.png",
+            "tittle": "劳动人事",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_3.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_3.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_3.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_4.png",
+            "tittle": "食品安全",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_5.png",
+            "tittle": "融资并购",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_6.png",
+            "tittle": "员工激励",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_7.png",
+            "tittle": "其它问题",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_8.png",
+            "tittle": "争议解决",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+          {
+            "icon": "../../images/index/index_left_icon_9.png",
+            "tittle": "特许经营",
+            "tips": "介绍法务官所在律所、法务官团队及餐饮法律咨询服务....",
+            "right_part": [
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+              {
+                "icon": "../../images/index/index_right_icon_4.jpg",
+                "tittle": "合作伙伴",
+                "tips": "介绍法务官所在律所，法务官团队及餐饮法律咨询服务....",
+              },
+            ]
+          },
+        ];
+        // if (res.data) wx.setStorageSync("indexPage", res.data);
+        // that.setData(wx.getStorageSync("indexPage"));
+        // console.log(wx.getStorageSync("indexPage"));
+        that.setData({
+          indexPage: back_data,
         });
       }
-    })
+    });
   },
   ontap() {
     const query = wx.createSelectorQuery()
@@ -117,7 +286,7 @@ Page({
 
   },
   onChoose: function({
-
+    
     currentTarget: {
       dataset: {
         category,
@@ -125,17 +294,18 @@ Page({
       }
     }
   }) {
-    //console.log(servicesGroup[category][2][service][0]);
+    console.log(servicesGroup[category][2][service][0]);
     this.setData({
       modal: {
         service,
         category,
         show: true,
-        icon: this.data.indexPage[category][3][service][0],
-        name: this.data.indexPage[category][3][service][1],
-        content: this.data.indexPage[category][3][service][3]
+        icon: servicesGroup[category][2][service][0],
+        name: servicesGroup[category][2][service][1],
+        content: servicesGroup[category][2][service][3]
       }
-    }, function() {})
+    }, function() {
+    })
   },
   onPageScroll(e) {
     let that = this
@@ -185,24 +355,18 @@ Page({
     })
   },
   onContract: function(e) {
-    console.log("contract")
-    console.log(this.data)
-    const category = this.data.indexPage[this.data.modal.category][1]
-    const target = this.data.modal.name
+    // console.log("contract")
     wx.navigateTo({
-      url: `/pages/submitService/submitService?category=${category}&target=${target}&method=contract&contract_type_checked=1`
+      url: `/pages/question/question?category=${this.data.modal.category}&name=${this.data.modal.service}&type=1`
     })
   },
   onCommunication: function(e) {
-    console.log(this.data)
-    const category = this.data.indexPage[this.data.modal.category][1]
-    const target = this.data.modal.name
     // console.log(getApp())
-    const that = this
+    const that=this
     // console.log(wx.getStorageSync("customer"))
-    if (wx.getStorageSync("isAllInfo")) {
-      if (wx.getStorageSync("vip")) wx.navigateTo({
-        url: `/pages/submitService/submitService?category=${category}&target=${target}&method=communication`
+    if (wx.getStorageSync("customer").isAllInfo) {
+      if (wx.getStorageSync("customer").vip.kind !== "普通" || wx.getStorageSync("fake")) wx.navigateTo({
+        url: `/pages/question/question?category=${this.data.modal.category}&name=${this.data.modal.service}&type=0`
       })
       else wx.showModal({
         title: '您不是会员',
@@ -213,9 +377,16 @@ Page({
         cancelColor: 'gray',
         success(res) {
           if (res.confirm) {
-            getApp().globalData.indexPage.paymentCallback = () => wx.navigateTo({
-              url: `/pages/submitService/submitService?category=${category}&target=${target}&method=communication`
-            })
+            // console.log('用户点击确定')
+            let index = getApp().globalData.index || {}
+            getApp().globalData.index = {
+              ...index,
+              callback: () => {
+                wx.navigateTo({
+                  url: `/pages/question/question?category=${that.data.modal.category}&name=${that.data.modal.service}&type=0`
+                })
+              }
+            }
             wx.navigateTo({
               url: `/pages/pay/pay`
             })
@@ -229,7 +400,13 @@ Page({
         icon: "none"
       });
       setTimeout(() => {
-        getApp().globalData.indexPage.shouldCompleteInfo = true
+        const {
+          globalData
+        } = getApp()
+        globalData.index = {
+          ...globalData.index,
+          shouldCompleteInfo: true
+        }
         wx.switchTab({
           url: '/pages/user/user',
         })

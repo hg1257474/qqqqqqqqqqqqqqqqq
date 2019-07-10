@@ -1,2 +1,0 @@
-<!--pages/fileSubmit/fileSubmit.wxml-->
-<web-view src="{{src}}"></web-view>

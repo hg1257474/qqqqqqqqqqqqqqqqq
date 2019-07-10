@@ -1,8 +1,0 @@
-<!--components/select.wxml-->
-<view class="container">
-  <view wx:if="{{selected}}" class=" {{shouldShowOptions?'expand':'collpase'}} " bindtap="onChangeFolding">{{selected}}</view>
-  <view wx:if="{{!selected}}" class=" {{shouldShowOptions?'expand dim':'collpase dim'}} " bindtap="onChangeFolding">未填写</view>
-  <view wx:if="{{shouldShowOptions}}" class="container2">
-    <view wx:for="{{options}}" wx:key="{{index}}" data-value="{{item}}" bindtap="onChoose" class="{{selected===item&&'selected'}}">{{item}}</view>
-  </view>
-</view>

@@ -5,6 +5,9 @@ App({
 
   },
   globalData: {
-    indexPage:{}
+    vip: false,
+    info: {
+      nickName: "张三"
+    }
   }
 })

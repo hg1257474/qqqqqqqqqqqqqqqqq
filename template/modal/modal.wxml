@@ -6,7 +6,7 @@
     <view class="name">{{name}}</view>
     <view class="yaodian">要点:</view>
     <view class="content">{{content}}</view>
-    <view class="advisory" bindtap="onCommunication">我要咨询</view>
-    <view class="contract" bindtap="onContract">我要合同</view>
+    <view class="advisory" bindtap="onCommunication">咨询</view>
+    <view class="contract" bindtap="onContract">合同</view>
   </view>
 </view>

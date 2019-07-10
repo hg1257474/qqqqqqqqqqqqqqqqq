@@ -1,0 +1,11 @@
+<!--pages/register/register.wxml-->
+<view wx:if="{{shouldAuthorization}}">
+
+  <view class="avatar">
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <view class="nickName">
+    <open-data type="userNickName" class="nickName"></open-data>
+  </view>
+  <button class="authorization-btn" open-type='getUserInfo' bindgetuserinfo="onGetUserInfo">点击进行授权</button>
+</view>

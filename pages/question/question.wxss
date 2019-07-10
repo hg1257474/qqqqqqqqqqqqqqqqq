@@ -1,0 +1,24 @@
+/* pages/question/question.wxss */
+
+page {
+  background: #f5f9fc;
+}
+
+view {
+  margin-top:2vw;
+  margin-left: 4vw;
+}
+
+textarea {
+  background: white;
+  width: 92vw;
+  margin: 3vw 4vw 5vw;
+  height: 80vh;
+  box-shadow: 0 0 1px black inset;
+}
+
+button {
+  background: #1b325f;
+  color: white;
+  width: 92vw;
+}
