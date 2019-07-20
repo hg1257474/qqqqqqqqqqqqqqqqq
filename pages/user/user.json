@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "个人中心",
+  "navigationBarTitleText": "餐饮法务官",
     "usingComponents": {
       "select": "/components/select/select"
     }

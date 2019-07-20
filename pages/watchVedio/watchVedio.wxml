@@ -1,0 +1,2 @@
+<!--pages/watchVedio/watchVedio.wxml-->
+<txv-video vid="h0328kkwii8" playerid="txv1"></txv-video>

@@ -1,19 +1,18 @@
 {
   "pages": [
-    "pages/set_question/set_question",
-    "pages/question_info/question_info",
-    "pages/question_deal/question_deal",
-    "pages/account/account",
-    "pages/review/review",
-    "pages/order_info/order_info",
     "pages/index/index",
-    "pages/user/user",
-    "pages/chat/chat",
+    "template/modal/modal",
     "pages/pay/pay",
-    "pages/question/question",
-    "pages/order/order",
-    "pages/service/service",
-    "template/modal/modal"
+    "pages/order_info/order_info",
+    "pages/order_list/order_list",
+    "pages/serviceList/serviceList",
+    "pages/serviceInfo/serviceInfo",
+    "pages/submitService/submitService",
+    "pages/user/user",
+    "pages/fileUpload/fileUpload",
+    "pages/point_list/point_list",
+    "pages/customer_service/customer_service",
+    "pages/watchVedio/watchVedio"
   ],
   "permission": {
     "scope.userLocation": {
@@ -22,46 +21,46 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#1b325f",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarBackgroundColor": "#199fef",
+    "navigationBarTitleText": "餐饮服务官",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#fff",
-    "selectedColor": "#f26c4f",
-    "backgroundColor": "#1b325f",
+    "color": "#d1d1d1",
+    "selectedColor": "#199fef",
+    "backgroundColor": "#f7f7f7",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/tabbar/index2.png",
-        "selectedIconPath": "images/tabbar/index_selected2.png"
+        "iconPath": "images/tabbar/index.png",
+        "selectedIconPath": "images/tabbar/index_selected.png"
       },
       {
-        "pagePath": "pages/set_question/set_question",
-        "text": "需求",
-        "iconPath": "images/tabbar/service2.png",
-        "selectedIconPath": "images/tabbar/service_selected2.png"
-      },
-      {
-        "pagePath": "pages/service/service",
+        "pagePath": "pages/serviceList/serviceList",
         "text": "服务",
-        "iconPath": "images/tabbar/service2.png",
-        "selectedIconPath": "images/tabbar/service_selected2.png"
+        "iconPath": "images/tabbar/service.png",
+        "selectedIconPath": "images/tabbar/service_selected.png"
       },
       {
-        "pagePath": "pages/service/service",
+        "pagePath": "pages/customer_service/customer_service",
         "text": "客服",
-        "iconPath": "images/tabbar/kefu2.png",
-        "selectedIconPath": "images/tabbar/kefu_selected2.png"
+        "iconPath": "images/tabbar/customer.png",
+        "selectedIconPath": "images/tabbar/customer_selected.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "images/tabbar/user2.png",
-        "selectedIconPath": "images/tabbar/user_selected2.png"
+        "iconPath": "images/tabbar/user.png",
+        "selectedIconPath": "images/tabbar/user_selected.png"
       }
     ]
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "plugins": {
+    "tencentvideo": {
+      "version": "1.3.3",
+      "provider": "wxa75efa648b60994b"
+    }
+  }
 }

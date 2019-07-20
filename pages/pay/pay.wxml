@@ -1,5 +1,5 @@
 <!--pages/pay/pay.wxml-->
-<view wx:if="{{!shouldPayContract}}">
+<view class="fix-bug" wx:if="{{!shouldPayContract}}">
   <view class="banner-background">
   </view>
   <image class="com-img" src="/images/pay/communication.png"></image>
@@ -13,19 +13,17 @@
   <view class="service-table">
     <view class="price-block">
       <view class="service-left">服务价格</view>
-      <view class="service-right service-right-top">{{payPage[category][0]/100}}元</view>
+      <view class="service-right service-right-top">{{payPage[category][0]/100?(payPage[category][0]/100+"元"):'加载中'}}</view>
+    </view>
+    <view class="detail-block" wx:if="{{points}}">
+      <view class="service-left">积分抵扣</view>
+      <view class="service-right">{{points}} (1积分抵扣1元)</view>
     </view>
     <view class="detail-block">
       <view class="service-left">服务说明</view>
-      <view class="service-right">{{payPage[category][1]}}</view>
+      <view class="service-right">{{payPage[category][1]||'加载中'}}</view>
     </view>
   </view>
 
   <button bindtap="onPay" class="com-btn">立即支付</button>
-</view>
-<view wx:if="{{shouldPayContract}}" class="contract">
-  <image class="con-img" src="/images/pay/contract.png"></image>
-  <view class="con-service">{{service}}</view>
-  <view class="con-fee">{{totalFee/100}}元</view>
-  <button bindtap="onPay" class="con-btn">立即支付</button>
 </view>

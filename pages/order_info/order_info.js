@@ -1,4 +1,7 @@
 // pages/order_info/order_info.js
+const {
+  ORDER_URL
+} = require('../../utils/config.js')
 Page({
 
   /**
@@ -16,7 +19,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    const that = this
+    wx.request({
+      url: ORDER_URL+"/"+options.id,
+      success(res) {
+        that.setData(res.data)
+      }
+    })
   },
 
   /**
@@ -30,7 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+   
   },
 
   /**

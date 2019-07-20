@@ -6,7 +6,7 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
-		"postcss": false,
+		"postcss": true,
 		"minified": false,
 		"newFeature": true,
 		"autoAudits": false,
@@ -14,7 +14,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wx1f796851933a0a32",
+	"appid": "wxa3729a934847ddfb",
 	"projectname": "miniprogram-test-1",
 	"debugOptions": {
 		"hidedInDevtools": []

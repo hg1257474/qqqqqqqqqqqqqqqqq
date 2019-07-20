@@ -1,6 +1,7 @@
 {
-  "navigationBarTitleText": "产品列表",
+  "navigationBarTitleText": "餐饮法务官",
   "usingComponents": {
-    "modal":"/template/modal/modal"
-  }
+    "modal": "/template/modal/modal"
+  },
+  "enablePullDownRefresh": false
 }

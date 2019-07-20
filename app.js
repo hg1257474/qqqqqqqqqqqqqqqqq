@@ -2,12 +2,15 @@
 App({
   onLaunch(options) {
     wx.setStorageSync("fake", false)
-
+    console.log("refresh")
+    console.log("refresh")
   },
   globalData: {
-    vip: false,
-    info: {
-      nickName: "张三"
+    indexPage:{},
+    refresh(){
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
     }
   }
 })

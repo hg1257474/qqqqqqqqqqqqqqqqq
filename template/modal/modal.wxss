@@ -29,8 +29,8 @@ icon{
   width:7.07vw;
   
   height:7.07vw;
-  top:-3vw;
-  right:-3vw;
+  top:1.4vw;
+  right:1.3vw;
 }
 .icon {
   width: 16vw;
@@ -45,9 +45,10 @@ icon{
 }
 
 .yaodian {
-  font-size: 2.93vw;
+  /* font-size: 2.93vw; */
+  font-size: 14px;
   vertical-align: top;
-  width: 8.53vw;
+  width: 10vw;
   display: inline-block;
 }
 
@@ -57,22 +58,32 @@ icon{
   display: inline-block;
   color: #989898;
   font-size: 2.93vw;
+  vertical-align: top;
 }
 
 .advisory,.contract {
   width: 36.67vw;
   display:inline-block;
   color:white;
-  height: 6.67vw;
+  /* height: 6.67vw; */
+  line-height:12vw;
   border-radius: 3.33vw;
   margin-top:5.87vw;
+  font-size: 16px;
+  position: absolute;
+  bottom: 0vw;
+  left: 0;
+  width: 50%;
 }
 
 .advisory {
   background: #0e2d6b;
-  margin-right: 4.93vw;
+  /* margin-right: 4.93vw; */
+  border-radius:0 0 0 2.67vw;
 }
 
 .contract {
   background: #ff6342;
+  left: 50%;
+  border-radius:0 0 2.67vw 0;
 }

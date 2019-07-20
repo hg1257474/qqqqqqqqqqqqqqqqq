@@ -1,20 +1,202 @@
+/**index.wxss**/
 
-/**index.wxss**/.main{width: 100%;height: 100%;}
-.nav-bar{z-index: 1;position: fixed;width: 25.6vw;height: 100%;background: #f5f9fc;}
-.category{display: flex;justify-content: center;align-items: center;font-size: 3.47vw;width: 100%;height: 14.13vw;}
-.category-icon{width:25px;height:25px;margin:0px 5px;}
-.category-name{flex:2;}
-.category-selected{background: white;}
-.content-bar{padding-left: 212rpx;width: 100%;height: 100%;}
-.services-name{margin:30rpx 0 20rpx;font-size: 4.67vw;width: 24vw;display: inline-block;}
-.services-introduction{display: block;font-size: 22rpx;color: #989898;}
-.service-box{height:186rpx;margin:5vw 0;}
-.service-icon{width: 186rpx;height: 186rpx;float: left;}
-.service-content{float: left;vertical-align: top;margin-left: 15rpx;position: relative;height: 186rpx;}
-.service-name{font-size: 35rpx;}
-.service-introduction{font-size: 22rpx;color: #989898;width: 314rpx;margin-top: 17rpx;}
-.service-introduction::after{content: "...";}
-.to-talk{border-radius: 50%;background-color: rgb(187, 187, 187);width: 43rpx;height: 43rpx;margin-left: 265rpx;position: absolute;right: 1vw;bottom: 1vw;}
-.service-selected{background: #208be3;}
-.to-talk::before{content: "";background-color: rgb(255, 255, 255);position: absolute;width: 5rpx;height: 27rpx;left: 19rpx;top: 8rpx;}
-.to-talk::after{content: "";background-color: rgb(255, 255, 255);position: absolute;width: 27rpx;height: 5rpx;left: 8rpx;top: 19rpx;}
+.main {
+  width: 100vw;
+  height: 90vh;
+  padding-top:8.73vw;
+  overflow: hidden;
+}
+.index-title-img{
+  width:73.33vw;
+  height:34.67vw;
+  margin-top:2vw;
+}
+.main-title {
+  position:fixed;
+  color: white;
+  top:0;
+  left:0;
+  background: #199fef;
+  height: 8.73vw;
+  line-height: 8.73vw;
+  width:100vw;
+  padding-left:4vw;
+  font-size:3.2vw;
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loading-icon {
+  width: 20vw;
+  height: 20vw;
+  position: absolute;
+  left: 40vw;
+  top: 40vh;
+  border-radius: 50%;
+  border: 4px solid rgb(78, 231, 78);
+  border-bottom-color: transparent;
+  animation: rotating 1500ms infinite;
+  -moz-animation: rotating 1500ms infinite; /* Firefox */
+  -webkit-animation: rotating 1500ms infinite; /* Safari 和 Chrome */
+  -o-animation: rotating 1500ms infinite; /* Opera */
+  margin: 0;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(1deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nav-bar {
+  z-index: 1;
+  position: fixed;
+  width: 21.73vw;
+  height: 100%;
+  
+color:#828282;
+  overflow-y: auto;
+  background: #f7f7f7;
+}
+
+.nav-bar:after {
+  content: "";
+  height: 10vh;
+}
+
+.category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.47vw;
+  width: 100%;
+  height: 12vw;
+}
+
+.category-icon {
+  /* padding-left: 0.5em; */
+  width: 25px;
+  height: 25px;
+  margin: 0px 5px;
+}
+
+.category-name {
+  /* flex: 2; */
+}
+
+.category-selected {
+  background: white;
+  position: relative;
+  font-weight:800;
+  color:black;
+}
+
+.category-selected:before {
+  content: "";
+  height: 5.73vw;
+  top: 3.13vw;
+  width: 1.33vw;
+  background: #199fef;
+  position: absolute;
+  left: 0;
+}
+
+.content-bar {
+  padding-left: 28.66vw;
+  /* width: 74.4vw; */
+  height: 100vh;
+  background: white;
+}
+
+.services-name {
+  margin: 4.4vw 0 4.4vw;
+  font-size: 3.2vw;
+  width: 24vw;
+  display: inline-block;
+}
+
+.services-introduction {
+  display: block;
+  font-size: 22rpx;
+  color: #989898;
+}
+
+.service-box {
+  height: 186rpx;
+  margin: 5vw 0;
+}
+
+.service-icon {
+  width: 9.6vw;
+  height: 9.6vw;
+  float: left;
+}
+
+.service-content {
+  float: left;
+  vertical-align: top;
+  margin-left: 7.07vw;
+  position: relative;
+  height: 21.03vw;
+  width:40vw;
+}
+
+.service-name {
+  font-size: 4vw;
+}
+
+.service-introduction {
+  font-size: 2.93vw;
+  color: #989898;
+  width: 40vw;
+  margin-top: 17rpx;
+}
+
+.service-introduction::after {
+  content: "";
+}
+
+.to-talk {
+  border-radius: 50%;
+  background-color: rgb(187, 187, 187);
+  width: 5.73vw;
+  height: 5.73vw;
+  margin-left: 265rpx;
+  position: absolute;
+  right: -9.431vw;
+  bottom: 0;
+}
+
+.service-selected {
+  background: #208be3;
+}
+
+.to-talk::before {
+  content: "";
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  width: 0.67vw;
+  height: 3.6vw;
+  left: 2.53vw;
+  top: 1.065vw;
+}
+
+.to-talk::after {
+  content: "";
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  width: 3.6vw;
+  height: 0.67vw;
+  left: 1.065vw;
+  top: 2.53vw;
+}

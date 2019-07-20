@@ -1,27 +1,42 @@
-<view class="main">
+<wxs module="lodash">
+  var getImage = function(data) {
+    if (data.indexOf("base64") !== -1) return data
+    return "https://www.huishenghuo.net/resource_test/" + data
+  }
+  module.exports.getImage = getImage;
+</wxs>
+
+<view wx:if="{{isLoading}}" class="loading-container">
+  <view class="loading-icon"></view>
+</view>
+<view class="main-title" catchtouchmove="stopTouch">为餐饮业护航，替餐饮人撑腰 </view>
+<view wx:if="{{!isLoading}}" class="main" catchtouchmove="return">
   <view class="nav-bar">
-  <!--bindtap="onCategoryTap"-->
+    <!--bindtap="onCategoryTap"-->
     <view wx:for="{{indexPage}}" wx:key="{{index}}" data-id="{{index}}" class="category {{ category === index ? 'category-selected':''}}" bindtap="onCategoryTap" data-current="{{index}}">
-      <image mode="aspectFit" src="{{item['icon']}}" class="category-icon"></image>
-      <view class="category-name">{{item['tittle']}}</view>
+      <image wx:if="{{false}}" mode="aspectFit" src="{{/*lodash.getImage(item[0])*/}}" class="category-icon"></image>
+      <view class="category-name">{{item[1]}}</view>
+    </view>
+    <view class="category">
+  </view>
+</view>
+
+<scroll-view scroll-y="true" scroll-top="{{scrollTop}}" bindscroll="onScroll" class="content-bar">
+  <image class="index-title-img" src="/images/index_title.png" />
+  <view wx:for="{{indexPage}}" wx:for-index="idx" wx:for-item="services" wx:key="{{idx}}">
+    <view class="services-name" id="category-scroll-{{idx}}">{{services[1]}}</view>
+    <view class="services-introduction" wx:if="{{false}}">({{services[2]}})</view>
+    <view wx:for="{{services[3]}}" wx:key="{{index}}" class="service-box" bindtap="onChoose" data-service="{{index}}" data-category="{{idx}}">
+      <image class="service-icon" mode="aspectFit" src="{{lodash.getImage(item[0])}}"></image>
+      <view class="service-content">
+        <view class="service-name">{{item[1]}}</view>
+        <view class="service-introduction">{{item[2]}}</view>
+        <view data-service="{{index}}" data-category="{{idx}}" class="{{(idx==modal.category&&index===modal.service)?'to-talk service-selected':'to-talk'}}"></view>
+      </view>
     </view>
   </view>
 
-  <view class="content-bar" >
-    <view wx:for="{{indexPage}}" wx:for-index="idx" wx:for-item="services" wx:key="{{idx}}">
-      <view class="services-name">{{services['tittle']}}</view>
-        <view class="services-introduction">({{services['tips']}})</view>
-        <view wx:for="{{services['right_part']}}" wx:key="{{index}}" class="service-box">
-          <image class="service-icon" mode="aspectFit" src="{{item['icon']}}"></image>
-          <view class="service-content">
-            <view class="service-name">{{item['tittle']}}</view>
-            <view class="service-introduction">{{item['tips']}}</view>
-            <view bindtap="onChoose" data-service="{{index}}" data-category="{{idx}}" class="{{(idx==modal.category&&index===modal.service)?'to-talk service-selected':'to-talk'}}"></view>
-          </view>
-        </view>
-      </view>
-
-    </view>
+</scroll-view>
 
 </view>
 
