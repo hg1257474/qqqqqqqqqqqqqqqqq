@@ -1,0 +1,29 @@
+<!--pages/pay/pay.wxml-->
+<view class="fix-bug" wx:if="{{!shouldPayContract}}">
+  <view class="banner-background">
+  </view>
+  <image class="com-img" src="/images/pay/communication.png"></image>
+  <view class="com-title">咨询业务</view>
+
+  <view class="categories">
+    <view class="{{category==='0'?'category category-selected':'category'}}" data-id="0" bindtap="onTap">单次</view>
+    <view class="{{category==='1'?'category category-selected':'category'}}" data-id="1" bindtap="onTap">包月</view>
+    <view class="{{category==='2'?'category category-selected':'category'}}" data-id="2" bindtap="onTap">包年</view>
+  </view>
+  <view class="service-table">
+    <view class="price-block">
+      <view class="service-left">服务价格</view>
+      <view class="service-right service-right-top">{{payPage[category][0]/100?(payPage[category][0]/100+"元"):'加载中'}}</view>
+    </view>
+    <view class="detail-block" wx:if="{{points}}">
+      <view class="service-left">积分抵扣</view>
+      <view class="service-right">{{points}} (1积分抵扣1元)</view>
+    </view>
+    <view class="detail-block">
+      <view class="service-left">服务说明</view>
+      <view class="service-right">{{payPage[category][1]||'加载中'}}</view>
+    </view>
+  </view>
+
+  <button bindtap="onPay" class="com-btn">立即支付</button>
+</view>

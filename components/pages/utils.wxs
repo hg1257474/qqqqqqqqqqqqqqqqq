@@ -1,0 +1,4 @@
+  var getTruncatedFilename = function (filename) {
+  return filename.length > 18 ? (filename.slice(0, 6) + "..." + filename.slice(-10)) : filename
+}
+module.exports.getTruncatedFilename = getTruncatedFilename;

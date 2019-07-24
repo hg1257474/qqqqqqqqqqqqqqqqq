@@ -1,0 +1,186 @@
+/* pages/user/user.wxss*/
+
+page {
+  background: #f2f2f2;
+  font-size: 3.47vw;
+}
+
+.info {
+  height: 20vw;
+  margin-top: -37.6vw;
+  line-height: 20vw;
+}
+
+.info>view {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.top {
+  height: 40.93vw;
+  background: linear-gradient(#199fef 72.31%, white);
+}
+
+.order-vip-container {
+  width: 93.86vw;
+  height: 25.33vw;
+  margin: 5.73vw auto;
+  background: white;
+  border-radius: 1.33vw;
+}
+
+.order-img-container {
+  width: 26.27vw;
+  height: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-right: 1px solid #e1e3e8;
+}
+
+.expires-container {
+  width: 66.59vw;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.order-img {
+  width: 7.87vw;
+  height: 7.87vw;
+  margin-bottom: 1vw;
+}
+
+.vip-container {
+  width: 23.07vw;
+  height: 7.87vw;
+  line-height: 7.87vw;
+  background: white;
+  border-radius: 4vw;
+  margin-left: 5.33vw;
+  font-size: 2.93vw;
+}
+
+.vip-image {
+  width: 4.4vw;
+  height: 4.4vw;
+  margin: 0 1.87vw 0 2vw;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nickname {
+  margin-left: 3.07vw;
+  vertical-align: middle;
+  font-size: 4.53vw;
+  width: 38.27vw;
+  overflow: hidden;
+  color: white;
+}
+
+.avatar {
+  width: 20vw;
+  height: 20vw;
+  margin-left: 5.33vw;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.navigator {
+  height: 12vw;
+  border-bottom: 1px solid #f2f2f2;
+  background: white;
+  line-height: 12vw;
+}
+
+.navigator:after {
+  content: "";
+  float: right;
+  width: 3vw;
+  height: 3vw;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  transform: rotate(45deg);
+  margin: 4vw 5.33vw 0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin: 0 2.8vw;
+  vertical-align: middle;
+}
+
+.item {
+  width: 93.87vw;
+  margin-left: auto;
+  margin-right: auto;
+  height: 12vw;
+  line-height: 12vw;
+  background: white;
+  font-size: 3.87vw;
+  color: #646464;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+input, select {
+  height: 100%;
+  float: right;
+  width: 56vw;
+  color: black;
+  position: relative;
+  margin-right: 2.67vw;
+}
+
+.save-space {
+  width: 93.87vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.item-icon {
+  height: 6vw;
+  width: 6vw;
+  margin: 0 2.53vw 0 3.33vw;
+  vertical-align: middle;
+}
+
+.user-info-btn {
+  margin: 5vw auto;
+  color: white;
+  background: #41b035;
+  font-size: 5.07vw;
+  width: 85%;
+  line-height: 44px;
+  margin-bottom: 10vh;
+}
+
+.complete_tips {
+  color: #fff;
+  background: #41b035;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 2px 8px;
+}
+
+.user_points_wrapper {
+  display: flex;
+}
+
+.user_points_wrapper .user_points_img_view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_points_wrapper .user_points_tittle {
+  flex: 2;
+}
+
+.points {
+  margin-left: 46vw;
+  color: #41b035;
+  font-size: 14px;
+}

@@ -1,0 +1,220 @@
+<view class="my-title">服务列表</view>
+<view class="main p-t">
+  <view class="single_info_wrapper">
+    <image src="/images/new/status.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">服务状态</text>
+    <view class="single_info_content">
+      <text class="contract_type">{{status}}</text>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/new/service-name.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">服务名</text>
+    <view class="single_info_content">
+      <text class="contract_type">{{name}}</text>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper" bindtap="onChangeDescriptionShow">
+    <image src="/images/new/description.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">需求描述</text>
+    <view class="single_info_content single_info_content_right">
+      <image src="/images/set_question/{{shouldViewDescription ? 'set_question_icon_up.png':'set_question_icon_down.png' }}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view class='single_info_content text-file-container' wx:if="{{shouldViewDescription}}">
+    <view class="add_note" wx:if="{{isTextDescriptionType}}">{{description}}</view>
+    <view wx:if="{{!isTextDescriptionType}}" class="upload_flie_wrapper">
+      <view class="upload_flie_tittle text-center">上传文件</view>
+      <view class="upload_flie_list">
+        <view class="upload_flie_data" wx:key="{{index}}" wx:for="{{description}}">
+          <view class="upload_flie_img_wrapper">
+            <image src="/images/set_question/set_question_icon_flie.png" class="upload_flie_img"></image>
+          </view>
+          <view class="upload_flie_data_content">
+            <view class="upload_flie_name">{{item[0]}}</view>
+            <view class="upload_flie_size">{{item[1]}}</view>
+          </view>
+          <view class="upload_flie_function">
+            <button class="upload_flie_btn upload_flie_scan" data-index="{{index}}" bindtap="onPreviewFile">查看</button>
+            <button wx:if="{{false}}" class="upload_flie_btn upload_flie_down" data-index="{{index}}" bindtap="onDownloadFile">下载</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper">
+    <image src="/images/new/contact-method.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">预留沟通方式</text>
+    <view class="single_info_content">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio_label">
+          <image src="/images/set_question/{{contact.method === 'weChat'?'set_question_icon_wx_active':'set_question_icon_ding_active'}}.png" class="radio_img"></image>
+        </label>
+      </radio-group>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper" bindtap="onChangeContactShow">
+    <image src="/images/new/contact.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">预留联系信息</text>
+    <view class="single_info_content single_info_content_right">
+      <image src="/images/set_question/{{shouldViewContact ? 'set_question_icon_up.png':'set_question_icon_down.png' }}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view class="single_info_content" wx:if="{{shouldViewContact}}">
+
+    <view class="single_user_data">
+      <view class="user_name">联系人</view>
+      <view class="user_wirte_wrapper">
+        {{contact.name}}
+      </view>
+    </view>
+
+    <view class="single_user_data">
+      <view class="user_name">电话</view>
+      <view class="user_wirte_wrapper">
+        {{contact.phone}}
+      </view>
+    </view>
+
+    <view class="single_user_data" wx:if="{{contact.method==='weChat'}}">
+      <view class="user_name">微信</view>
+      <view class="user_wirte_wrapper">
+        {{contact.content}}
+      </view>
+    </view>
+
+    <view class="single_user_data" wx:if="{{contact.method==='dingTalk'}}">
+      <view class="user_name">钉钉</view>
+      <view class="user_wirte_wrapper">
+        {{contact.content}}
+      </view>
+    </view>
+
+  </view>
+  <view wx:if="{{payment}}" class="single_info_wrapper">
+    <image src="/images/set_question/set_question_icon_price.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">报价</text>
+    <view class="single_info_content">
+      {{payment[0]/10}}
+      <text>元</text>
+      <button class="pay_now" bindtap="onPay" wx:if="{{!payment[1]}}">{{payment[1]?'查看':'去付款'}}</button>
+    </view>
+  </view>
+  <view class="single_info_wrapper" wx:if="{{processor}}" bindtap="onChangeProcessorShow">
+    <image src="/images/new/processor.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">对接律师</text>
+    <view class="single_info_content single_info_content_right">
+      <image src="/images/set_question/{{shouldViewProcessor ?  'set_question_icon_up.png':'set_question_icon_down.png'}}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view class="single_info_content lawer_info_wrapper" wx:if="{{shouldViewProcessor}}">
+    <view class="lawer_img_wrapper">
+      <image src="{{processor.avatar}}" class="lawer_img"></image>
+    </view>
+    <view class="lawer_info_content">
+      <view class="single_user_data">
+        <view class="user_name">姓名</view>
+        <view class="user_wirte_wrapper">
+          {{processor.name}}
+        </view>
+      </view>
+
+      <view class="single_user_data">
+        <view class="user_name">服务客户</view>
+        <view class="user_wirte_wrapper">
+          {{processor.serviceTotal}}单
+        </view>
+      </view>
+
+      <view class="single_user_data" id="temp-11">
+        <view class="user_name">总体评分</view>
+        <view class="user_wirte_wrapper">
+          {{processor.grade}}分
+        </view>
+      </view>
+
+      <view class="single_user_data">
+        <!--<view class="user_name">专长</view>-->
+        <view class="user_wirte_wrapper">
+          {{processor.expert}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="single_info_wrapper" wx:if="{{comment.length>0||canMakeComment}}" bindtap="onChangeCommentShow">
+    <image src="/images/new/comment.png" class="single_info_tittle_img"></image>
+    <text class="single_info_name">评价</text>
+    <view class="single_info_content single_info_content_right">
+      <image wx:if="{{!canMakeComment}}" src="/images/set_question/{{shouldViewComment? 'set_question_icon_up.png':'set_question_icon_down.png'}}" class="single_info_tittle_img"></image>
+    </view>
+  </view>
+  <view wx:if="{{canMakeComment||shouldViewComment}}">
+    <view class="single_info_content">
+
+      <view class="single_user_data single_evaluate_data" id="fix-bug-must">
+        <view class="user_name evaluate_tittle_w">
+          <view class="evaluate_icon_w">
+            <image src="/images/set_question/set_question_evaluate_1.png" class="evaluate_icon"></image>
+          </view>
+          <text class="evaluate_tittle">问题解决程度</text>
+        </view>
+        <view class="user_wirte_wrapper evaluate_content">
+          <view wx:for="{{[1,2,3,4,5]}}" wx:key="" data-index="{{index}}" bindtap='onRate1' class="strat_view">
+            <image src="{{index<=comment[0]?'/images/set_question/start-active.png':'/images/set_question/start.png'}}" class=" strat_view_img "></image>
+          </view>
+        </view>
+      </view>
+
+      <view class="single_user_data single_evaluate_data" id="fix-bug-must">
+        <view class="user_name evaluate_tittle_w">
+          <view class="evaluate_icon_w">
+            <image src="/images/set_question/set_question_evaluate_2.png" class="evaluate_icon"></image>
+          </view>
+          <text class="evaluate_tittle">问题回复速度</text>
+        </view>
+        <view class="user_wirte_wrapper evaluate_content">
+          <view wx:for="{{[1,2,3,4,5]}}" wx:key="" data-index="{{index}}" bindtap='onRate2' class="strat_view">
+            <image src="{{index<=comment[1]?'/images/set_question/start-active.png':'/images/set_question/start.png'}}" class=" strat_view_img "></image>
+          </view>
+        </view>
+      </view>
+
+      <view class="single_user_data single_evaluate_data" id="fix-bug-must">
+        <view class="user_name evaluate_tittle_w">
+          <view class="evaluate_icon_w">
+            <image src="/images/set_question/set_question_evaluate_3.png" class="evaluate_icon"></image>
+          </view>
+          <text class="evaluate_tittle">总体满意程度</text>
+        </view>
+        <view class="user_wirte_wrapper evaluate_content">
+          <view wx:for="{{[1,2,3,4,5]}}" wx:key="" data-index="{{index}}" bindtap='onRate3' class="strat_view">
+            <image src="{{index<=comment[2]?'/images/set_question/start-active.png':'/images/set_question/start.png'}}" class=" strat_view_img "></image>
+          </view>
+        </view>
+      </view>
+
+      <view class="single_user_data single_evaluate_data " id="fix-bug-must">
+        <view class="user_name evaluate_tittle_w ">
+          <view class="evaluate_icon_w ">
+            <image src="/images/set_question/set_question_evaluate_4.png " class="evaluate_icon "></image>
+          </view>
+          <text class="evaluate_tittle " id="fix-bug-must">详细评价意见</text>
+        </view>
+        <view class="user_wirte_wrapper evaluate_content ">
+        </view>
+      </view>
+      <view class="single_user_data_content ">
+        <textarea disabled="{{!canMakeComment}}" bindinput="onMakeCommentDetail" placeholder="{{canMakeComment?'请输入您的详细评价意见':''}} " class="add_advise " value="{{comment[3]}}"></textarea>
+      </view>
+
+    </view>
+
+    <button wx:if="{{canMakeComment}}" bindtap="onMakeComment" class="submit_evaluate ">提交</button>
+  </view>
+</view>
+<view id="dvider-1"></view>

@@ -1,0 +1,39 @@
+/* components/select.wxss */
+
+.container {
+  position: absolute;
+  z-index: 11;
+  width: 100%;
+}
+
+ .collpase::after {
+  content: "";
+  border-top: 1px solid #858585;
+  border-right: 1px solid #858585;
+  width: 1em;
+  vertical-align: middle;
+  height: 1em;
+  position:absolute;
+  right:0.5em;
+    top:50%;
+    margin-top:-0.5em;
+}
+
+.expand:after {
+  transform: rotate(-45deg);
+}
+
+.collpase:after {
+  transform: rotate(135deg);
+}
+
+.dim {
+  color: #646464;
+}
+.selected {
+  color: #3a89c9;
+}
+
+.container2 {
+  background: #f2f2f2;
+}

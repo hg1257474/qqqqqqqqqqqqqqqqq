@@ -1,0 +1,70 @@
+/* pages/order_info/order_info.wxss */
+page{
+  background:white;
+}
+.title{
+  height:21.6vw;
+  line-height:21.6vw;
+  font-size:5.33vw;
+  border-bottom:2.13vw solid #f2f2f2; 
+  text-align:center;
+}
+.my-title{
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  padding:10px 5px;
+  /* width: 100%; */
+  font-size: 16px;
+  display:block;
+  text-align: center;
+}
+.name-container{
+  font-size: 4vw;
+  width:99vw;
+  height:11.73vw;
+  line-height:11.73vw;
+}
+.name-container:after{
+  display:inline-block;
+  height:100%;
+  vertical-align:middle;
+}
+
+.icon{
+  width:5.33vw;
+  height:4.27vw;
+  vertical-align: middle;
+}
+.name {
+  color:#ff3333;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.left, .right {
+  font-size: 3.47vw;
+  display: inline-block;
+}
+
+.left {
+  color:#999999;
+  width: 20vw;
+  margin-left: 4vw;
+}
+
+.right {
+  margin-left:5.07vw;
+  width: 70vw;
+}
+.name-container{
+  font-size: 4vw;
+  width:99vw;
+
+}
+.temp,.name{
+  display: inline-block;
+  vertical-align: middle;
+}
+.dvider{
+  border-top:1px solid #f2f2f2;
+}

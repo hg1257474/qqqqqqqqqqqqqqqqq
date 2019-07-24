@@ -1,0 +1,17 @@
+
+<view class="my-title">订单列表</view>
+<view class="top-bar">
+  <view class="top-tittle">订单名称</view>
+  <view class="top-date top-status-tag">时间</view>
+  <view class="top-status top-status-tag">金额</view>
+</view>
+
+<view class="service_list_wrapper">
+  <navigator url="/pages/order_info/order_info?id={{item[3]}}" class="single_service_data" wx:for="{{orders}}" wx:key="{{index}}" >
+    <view class="service_name">{{item[0]}}</view>
+    <view class="service_time sec_info">{{item[1]}}</view>
+    <view class="service_state sec_info">{{item[2]/10}}元</view>
+  </navigator>
+</view>
+<view class="no-services" wx:if="{{loading}}">加载中</view>
+<view class="no-services" wx:if="{{!loading&&!orders.length}}">暂时无订单</view>
