@@ -1,17 +1,21 @@
 /* pages/service/service.wxss */
-page{height:100vh !important;background:#f2f2f2;}
 
-.my-title{
+page {
+  height: 100vh !important;
+  background: #f2f2f2;
+  font-size: 3.47vw;
+}
+
+.my-title {
   background: #fff;
   border-bottom: 1px solid #e6e6e6;
-  padding:10px 5px;
+  padding: 10px 5px;
   /* width: 100%; */
-  font-size: 16px;
-  display:block;
+  display: block;
   text-align: center;
 }
-page{
-  
+
+page {
 }
 
 page {
@@ -21,14 +25,14 @@ page {
 
 .top-bar {
   display: flex;
-  background-color: #f26c4f;
+  background-color: white;
   color: #fff;
   padding: 8px 5px;
-  font-size:15px;
   margin-bottom: 5vw;
 }
 
 .top-bar .top-tittle {
+  color: black;
   flex: 2;
 }
 
@@ -37,11 +41,11 @@ page {
 
 .top-bar .top-status-tag {
   margin: 0 3vw;
-  background: #3a89c9;
+  background: #199fef;
   color: #fff;
   padding: 0px 14px;
   border-radius: 14px;
-  font-size: 15px;
+  /* font-size: 15px; */
 }
 
 .top-bar .top-status {
@@ -49,25 +53,25 @@ page {
 
 .name {
   margin-left: 3.6vw;
-  font-size: 4.27vw;
+  /* font-size: 4.27vw; */
 }
 
 .no-services {
   display: block;
   text-align: center;
   line-height: 2em;
-  font-size:16px;
+  /* font-size: 16px; */
 }
 
 .date {
   margin-left: 11.47vw;
-  font-size: 3.87vw;
+  /* font-size: 3.87vw; */
   color: #999;
 }
 
 .status {
   margin-left: 11.33vw;
-  font-size: 3.87vw;
+  /* font-size: 3.87vw; */
   color: #999;
 }
 
@@ -97,8 +101,8 @@ button {
 
 .service_list_wrapper .single_service_data .service_name {
   color: #383838;
-  width:59%;
-  font-size: 16px;
+  width: 59%;
+  /* font-size: 16px; */
 }
 
 .service_list_wrapper .single_service_data .service_time {
@@ -109,16 +113,17 @@ button {
 
 .service_list_wrapper .single_service_data .sec_info {
   color: #999;
-/*
+  /*
   display: flex;
   justify-content: center;
   */
   align-items: center;
-  font-size: 16px;
+  /* font-size: 16px; */
   margin: 0 3vw;
-  margin:0;
-  width:23%;
+  margin: 0;
+  width: 23%;
 }
-.service_state.sec_info{
-  width:auto !important;
+
+.service_state.sec_info {
+  width: auto !important;
 }

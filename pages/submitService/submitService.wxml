@@ -3,7 +3,7 @@
 <form bindsubmit='onSubmit'>
   <view class="main p-t">
     <view wx:if="{{method==='contract'}}" class="single_info_wrapper">
-      <image src="/images/set_question/set_question_icon_hetong.png" class="single_info_tittle_img"></image>
+      <image src="/images/new/service-name.png" class="single_info_tittle_img"></image>
       <text class="single_info_name">合同类型</text>
       <view class="single_info_content">
         <radio-group class="radio-group" bindchange="contract_type_change">
@@ -17,7 +17,7 @@
     </view>
 
     <view class="single_info_wrapper">
-      <image src="/images/set_question/set_question_icon_note.png" class="single_info_tittle_img"></image>
+      <image src="/images/new/description.png" class="single_info_tittle_img"></image>
       <text class="single_info_name">需求描述</text>
       <view class="single_info_content"></view>
     </view>
@@ -47,7 +47,7 @@
     </view>
 
     <view class="single_info_wrapper">
-      <image src="/images/set_question/set_question_icon_lx_type.png" class="single_info_tittle_img"></image>
+      <image src="/images/new/contact-method.png" class="single_info_tittle_img"></image>
       <text class="single_info_name">选择沟通方式</text>
       <view class="single_info_content">
         <radio-group class="radio-group" bindchange="radioChange">
@@ -62,7 +62,7 @@
     </view>
 
     <view class="single_info_wrapper">
-      <image src="/images/set_question/set_question_icon_info.png" class="single_info_tittle_img"></image>
+      <image src="/images/new/contact.png" class="single_info_tittle_img"></image>
       <text class="single_info_name">老板信息</text>
       <view class="single_info_content"></view>
     </view>

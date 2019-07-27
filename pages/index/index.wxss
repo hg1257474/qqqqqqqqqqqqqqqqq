@@ -3,25 +3,32 @@
 .main {
   width: 100vw;
   height: 90vh;
-  padding-top:8.73vw;
+  padding-top: 8.73vw;
   overflow: hidden;
 }
-.index-title-img{
-  width:73.33vw;
-  height:34.67vw;
-  margin-top:2vw;
+
+.index-title-img {
+  width: 73.33vw;
+  height: 34.67vw;
+  margin-top: 2vw;
+  display: block;
 }
+
+.fix-img-left-margin {
+  margin-left: 4.5vw;
+}
+
 .main-title {
-  position:fixed;
+  position: fixed;
   color: white;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   background: #199fef;
   height: 8.73vw;
   line-height: 8.73vw;
-  width:100vw;
-  padding-left:4vw;
-  font-size:3.2vw;
+  width: 100vw;
+  padding-left: 4vw;
+  font-size: 3.2vw;
 }
 
 .loading-container {
@@ -63,8 +70,7 @@
   position: fixed;
   width: 21.73vw;
   height: 100%;
-  
-color:#828282;
+  color: #828282;
   overflow-y: auto;
   background: #f7f7f7;
 }
@@ -97,8 +103,8 @@ color:#828282;
 .category-selected {
   background: white;
   position: relative;
-  font-weight:800;
-  color:black;
+  font-weight: 800;
+  color: black;
 }
 
 .category-selected:before {
@@ -112,7 +118,7 @@ color:#828282;
 }
 
 .content-bar {
-  padding-left: 28.66vw;
+  padding-left: 24.16vw;
   /* width: 74.4vw; */
   height: 100vh;
   background: white;
@@ -148,7 +154,7 @@ color:#828282;
   margin-left: 7.07vw;
   position: relative;
   height: 21.03vw;
-  width:40vw;
+  width: 40vw;
 }
 
 .service-name {
@@ -181,22 +187,4 @@ color:#828282;
   background: #208be3;
 }
 
-.to-talk::before {
-  content: "";
-  background-color: rgb(255, 255, 255);
-  position: absolute;
-  width: 0.67vw;
-  height: 3.6vw;
-  left: 2.53vw;
-  top: 1.065vw;
-}
 
-.to-talk::after {
-  content: "";
-  background-color: rgb(255, 255, 255);
-  position: absolute;
-  width: 3.6vw;
-  height: 0.67vw;
-  left: 1.065vw;
-  top: 2.53vw;
-}

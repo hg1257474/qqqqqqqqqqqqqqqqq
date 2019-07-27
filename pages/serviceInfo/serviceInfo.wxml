@@ -1,7 +1,7 @@
 <view class="my-title">服务列表</view>
 <view class="main p-t">
   <view class="single_info_wrapper">
-    <image src="/images/set_question/set_question_order_state.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/status.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">服务状态</text>
     <view class="single_info_content">
       <text class="contract_type">{{status}}</text>
@@ -9,7 +9,7 @@
   </view>
 
   <view class="single_info_wrapper">
-    <image src="/images/set_question/set_question_icon_hetong.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/service-name.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">服务名</text>
     <view class="single_info_content">
       <text class="contract_type">{{name}}</text>
@@ -17,7 +17,7 @@
   </view>
 
   <view class="single_info_wrapper" bindtap="onChangeDescriptionShow">
-    <image src="/images/set_question/set_question_icon_note.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/description.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">需求描述</text>
     <view class="single_info_content single_info_content_right">
       <image src="/images/set_question/{{shouldViewDescription ? 'set_question_icon_up.png':'set_question_icon_down.png' }}" class="single_info_tittle_img"></image>
@@ -46,7 +46,7 @@
   </view>
 
   <view class="single_info_wrapper">
-    <image src="/images/set_question/set_question_icon_lx_type.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/contact-method.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">预留沟通方式</text>
     <view class="single_info_content">
       <radio-group class="radio-group" bindchange="radioChange">
@@ -58,7 +58,7 @@
   </view>
 
   <view class="single_info_wrapper" bindtap="onChangeContactShow">
-    <image src="/images/set_question/set_question_icon_info.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/contact.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">预留联系信息</text>
     <view class="single_info_content single_info_content_right">
       <image src="/images/set_question/{{shouldViewContact ? 'set_question_icon_up.png':'set_question_icon_down.png' }}" class="single_info_tittle_img"></image>
@@ -105,7 +105,7 @@
     </view>
   </view>
   <view class="single_info_wrapper" wx:if="{{processor}}" bindtap="onChangeProcessorShow">
-    <image src="/images/set_question/set_question_lawer_card.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/processor.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">对接律师</text>
     <view class="single_info_content single_info_content_right">
       <image src="/images/set_question/{{shouldViewProcessor ?  'set_question_icon_up.png':'set_question_icon_down.png'}}" class="single_info_tittle_img"></image>
@@ -147,7 +147,7 @@
   </view>
 
   <view class="single_info_wrapper" wx:if="{{comment.length>0||canMakeComment}}" bindtap="onChangeCommentShow">
-    <image src="/images/set_question/set_question_evaluate.png" class="single_info_tittle_img"></image>
+    <image src="/images/new/comment.png" class="single_info_tittle_img"></image>
     <text class="single_info_name">评价</text>
     <view class="single_info_content single_info_content_right">
       <image wx:if="{{!canMakeComment}}" src="/images/set_question/{{shouldViewComment? 'set_question_icon_up.png':'set_question_icon_down.png'}}" class="single_info_tittle_img"></image>

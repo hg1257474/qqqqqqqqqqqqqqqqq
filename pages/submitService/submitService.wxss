@@ -23,7 +23,7 @@
 }
 
 .single_info_wrapper .single_info_name {
-  font-size: 14px;
+  font-size: 3.47vw;
   color: #858585;
   display: flex;
   /* justify-content: center; */
@@ -35,7 +35,7 @@
 
 .single_info_wrapper .single_info_content {
   flex: 2;
-  font-size: 16px;
+  font-size: 3.47vw;
   color: #858585;
   display: flex;
   align-items: center;
@@ -47,7 +47,7 @@
 .single_info_content .add_note {
   width: 85%;
   padding: 15px;
-  font-size: 16px;
+  font-size: 3.47vw;
   color: #898989;
   border: 1px solid #e0e0e0;
   margin: 10px auto;
@@ -69,7 +69,7 @@
 
 .upload_flie_wrapper .upload_flie_tittle {
   color: #878787;
-  font-size: 14px;
+  font-size: 3.47vw;
   padding: 10px 0;
   border-bottom: 1px solid #e7e7e7;
 }
@@ -87,7 +87,7 @@
   color: #fff;
   background: #f26c4f;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 3.47vw;
   padding: 5px 10px;
   line-height: normal;
 }
@@ -97,7 +97,7 @@
   display: flex;
   align-items: center;
   color: #a2a2a2;
-  font-size: 14px;
+  font-size: 3.47vw;
 }
 
 /*upload_flie_list*/
@@ -130,12 +130,12 @@
 
 .upload_flie_list .upload_flie_data .upload_flie_data_content .upload_flie_name {
   color: #494949;
-  font-size: 14px;
+  font-size: 3.47vw;
 }
 
 .upload_flie_list .upload_flie_data .upload_flie_data_content .upload_flie_size {
   color: #a4a4a4;
-  font-size: 14px;
+  font-size: 3.47vw;
 }
 
 .upload_flie_list .upload_flie_data .upload_flie_data_content .upload_flie_close {
@@ -157,7 +157,7 @@
 
 .single_user_data {
   display: flex;
-  font-size: 16px;
+  font-size: 3.47vw;
   padding: 0 20px;
   margin: 8px 0;
 }
@@ -169,7 +169,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size:14px;
+  font-size:3.47vw;
 }
 
 .single_user_data .user_wirte_wrapper {
@@ -181,7 +181,7 @@
   padding:3px 10px;
   border-radius:4px;
   margin-left:10px;
-  font-size:14px;
+  font-size:3.47vw;
 }
 
 /*radio-group*/
@@ -194,7 +194,7 @@
   display: flex;
   align-items: center;
   margin-right: 8px;
-  font-size:14px;
+  font-size:3.47vw;
 }
 
 .radio-group .radio_label .radio {
@@ -214,6 +214,6 @@
   color: #fff;
   width:91%;
   margin:5vw auto;
-  font-size:14px;
+  font-size:3.47vw;
 
 }

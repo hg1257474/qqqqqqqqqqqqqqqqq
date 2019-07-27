@@ -1,14 +1,65 @@
 /**app.wxss**/
-page{height:100%;width:100vw;overflow-x: hidden;}
-.main{width: 100%;height: 100%;}
-.m-t{margin-top: 15px;}
-.m-l{margin-left: 15px;}
-.m-r{margin-right: 15px;}
-.m-b{margin-bottom: 15px;}
-.p-t{padding-top: 15px;}
-.p-l{padding-left: 15px;}
-.p-r{padding-right: 15px;}
-.p-b{padding-bottom: 15px;}
-.text-left{text-align: left;}
-.text-center{text-align: center;}
-.text-right{text-align: right;}
+
+page {
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+  font-size: 3.47vw;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.my-title {
+  font-size: 4.53vw;
+}
+
+.top-bar {
+  font-size: 4vw;
+}
+
+.m-t {
+  margin-top: 15px;
+}
+
+.m-l {
+  margin-left: 15px;
+}
+
+.m-r {
+  margin-right: 15px;
+}
+
+.m-b {
+  margin-bottom: 15px;
+}
+
+.p-t {
+  padding-top: 15px;
+}
+
+.p-l {
+  padding-left: 15px;
+}
+
+.p-r {
+  padding-right: 15px;
+}
+
+.p-b {
+  padding-bottom: 15px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}

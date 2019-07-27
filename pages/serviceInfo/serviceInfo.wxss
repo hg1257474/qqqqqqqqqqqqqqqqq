@@ -296,8 +296,8 @@
 }
 
 .single_evaluate_data .evaluate_tittle_w .evaluate_icon_w .evaluate_icon {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin-right: 6px;
 }
 

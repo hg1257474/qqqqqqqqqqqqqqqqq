@@ -1,8 +1,7 @@
 <!--pages/customer_service/customer_service.wxml-->
-<image src="/images/qwer.jpg" class="team-avatar"  />
+<image src="/images/qwer.jpg" class="team-avatar" />
 
 <view class="list">
-
   <view wx:for="{{lawyers}}" class="list-item" wx:key="{{index}}">
     <view class="avatar-container">
       <image src="{{item.avatar}}" mode="widthFix" class="avatar" />
@@ -12,9 +11,10 @@
       <view class="expert">{{item.expert}}</view>
     </view>
   </view>
+</view>
 
 
-  <!--
+<!--
   <view wx:for="{{[1]}}" class="list-item" wx:key="{{index}}">
     <image src="{{'/images/侯其锋(1).jpg'}}" mode="aspectFill" class="avatar" />
     <view>
@@ -51,9 +51,6 @@
     </view>
   </view>
   -->
-
-
-</view>
 <view class="dvider"></view>
 <view class="bottom-1">
   <button open-type='contact'>在线客服</button>

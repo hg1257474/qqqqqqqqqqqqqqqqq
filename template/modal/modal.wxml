@@ -9,7 +9,7 @@
 <view class="mask">
   <view class="container">
     <icon type="clear" color="#ff6342" bindtap="onClose"/>
-    <image src="{{lodash.getImage(icon)}}"class="icon" />
+    <image src="{{icon}}"class="icon" />
     <view class="name">{{name}}</view>
     <view class="yaodian">要点:</view>
     <view class="content">{{content}}</view>

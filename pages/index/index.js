@@ -53,6 +53,64 @@ Page({
     });
 
   },
+  cacheImg(img) {
+    const that = this
+    const FileSystemManager = wx.getFileSystemManager()
+    return new Promise(resolve => {
+      const downloadImg = () => new Promise(resolve => {
+        console.log(`${url}/resource/indexPage/${img[1]}/${img[0]}`)
+        wx.downloadFile({
+          url: `${url}/resource/indexPage/${img[1]}/${img[0]}`,
+          success(res) {
+            if (res.statusCode === 200) {
+              const result = FileSystemManager.saveFileSync(res.tempFilePath)
+              wx.setStorageSync(img[1], {
+                path: result
+              })
+              resolve(result)
+            }
+          }
+        })
+      })
+      const file = wx.getStorageSync(img[1])
+      console.log("ok", img)
+      console.log(file)
+      if (!file.path) downloadImg().then(resolve)
+      else try {
+        FileSystemManager.accessSync(file.path)
+        console.log(1)
+        resolve(file.path)
+      } catch (e) {
+        downloadImg().then(resolve)
+      }
+    })
+  },
+  getImage() {
+    let total = 0
+    let finish = false
+    const that = this
+    const indexPage = this.data.indexPage;
+    return new Promise(resolve => {
+      for (let terms of indexPage) {
+        for (let term of terms[1]) {
+          console.log(term[0])
+          total++
+          that.cacheImg(term[0]).then(value => {
+            total--
+            console.log(value)
+            term[0] = value
+            if (!total && finish) {
+              that.setData({
+                indexPage
+              })
+              resolve()
+            }
+          })
+        }
+      }
+      finish = true
+    })
+  },
   onReady() {
     wx.getSystemInfo({
       success: function(res) {
@@ -60,10 +118,6 @@ Page({
         console.log(deviceHeight)
       },
     })
-    const getNumber = x => {
-      const q = x.match(/indexPage(\d+)/)
-      return q ? parseInt(q[1], 10) : -1
-    }
     wx.hideTabBar({})
     console.log(wx.getStorageSync("indexPage"))
     console.log(wx.getStorageSync("isAllInfo"))
@@ -94,70 +148,24 @@ Page({
             setSessionId(res)
             wx.setStorageSync("isAllInfo", res.data.isAllInfo)
             wx.setStorageSync("vip", res.data.vip)
-            wx.showTabBar({
 
-            })
+            console.log(res.data)
             if (res.data.indexPage) {
-              /*
               wx.setStorageSync("indexPage", {
                 content: res.data.indexPage,
                 expires: res.data.expires
               })
-              */
-              res.data.indexPage.forEach((item, index) => {
-                wx.setStorageSync(`indexPage${index}`, item)
-              })
-              console.log(res.data.expires)
-              wx.setStorageSync("indexPageExpires", res.data.expires)
-              res.data.indexPage.forEach((item, index) => {
+            }
+            that.setData({
+              indexPage: wx.getStorageSync("indexPage").content
+            }, () => {
+              that.getImage().then(() => {
                 that.setData({
-                  [`indexPage[${index}]`]: item
+                  isLoading: false
                 })
+                wx.showTabBar({})
               })
-
-
-              // setStorage
-              const {
-                keys
-              } = wx.getStorageInfoSync()
-              keys.forEach((item, index) => {
-                if (item.includes("indexPage") && !item.includes("indexPageExpires") && getNumber(item) >= res.data.indexPage.length) {
-                  console.log(item, index)
-                  wx.clearStorageSync(item)
-                }
-              })
-              that.setData({
-                isLoading: false
-              })
-
-
-              /*
-              that.setData({
-                indexPage: res.data.indexPage
-              })
-              */
-            } else {
-              const {
-                keys
-              } = wx.getStorageInfoSync()
-              console.log(keys)
-              keys.forEach((item, index) => {
-                if (item.includes("indexPage") && !item.includes("indexPageExpires")) that.setData({
-                  [`indexPage[${getNumber(item)}]`]: wx.getStorageSync(item)
-                })
-              })
-              that.setData({
-                isLoading: false
-              })
-              /*
-              indexPage.content.forEach((item,index)=>{
-                that.setData({
-                  [`indexPage[${index}]`]:item
-                })
-              })
-              */
-
-            };
+            })
           }
         });
       }
@@ -206,9 +214,9 @@ Page({
         service,
         category,
         show: true,
-        icon: this.data.indexPage[category][3][service][0],
-        name: this.data.indexPage[category][3][service][1],
-        content: this.data.indexPage[category][3][service][2] //[3]
+        icon: this.data.indexPage[category][1][service][0],
+        name: this.data.indexPage[category][1][service][1],
+        content: this.data.indexPage[category][1][service][2] //[3]
       }
     }, function() {})
   },

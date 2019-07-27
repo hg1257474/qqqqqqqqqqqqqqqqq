@@ -1,0 +1,31 @@
+var dictionary = {
+  contract: '合同',
+  review: '审核',
+  draft: '起草',
+  communication: '咨询',
+  submitted: '已提交',
+  wait_quote: '待报价',
+  wait_assign: '待分配',
+  wait_pay: '待支付',
+  processing: '服务中',
+  end: '已完结'
+};
+var formatDate = function(_date) {
+  console.log(11)
+  _date = getDate(_date)
+  return _date.getFullYear() + "." + (_date.getMonth() + 1) + "." + _date.getDate()
+}
+var formatStatus = function(status) {
+  return dictionary[status]
+}
+var formatServiceName = function(serviceName) {
+  serviceName[2] = dictionary[serviceName[2]]
+  if (serviceName[3]) serviceName[3] = dictionary[serviceName[3]]
+  serviceName = serviceName.join("-")
+  return serviceName
+}
+module.exports = {
+  formatStatus: formatStatus,
+  formatDate: formatDate,
+  formatServiceName: formatServiceName
+}

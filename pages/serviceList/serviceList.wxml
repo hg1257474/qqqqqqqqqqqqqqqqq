@@ -1,17 +1,17 @@
-<wxs src="../utils.wxs" module="utils" />
+<wxs src="../../utils/lodash.wxs" module="_"></wxs>
 <view class="my-title">服务列表</view>
 
 <view class="top-bar">
-  <view class="top-tittle">订单</view>
+  <view class="top-tittle">服务名</view>
   <view class="top-date top-status-tag">时间</view>
   <view class="top-status top-status-tag">状态</view>
 </view>
 
 <view class="service_list_wrapper">
-  <navigator url="/pages/serviceInfo/serviceInfo?id={{item[3]}}" class="single_service_data" wx:for="{{services}}" wx:key="{{index}}" >
-    <view class="service_name">{{item[0]}}</view>
-    <view class="service_time sec_info">{{item[1]}}</view>
-    <view class="service_state sec_info">{{item[2]}}</view>
+  <navigator url="/pages/serviceInfo/serviceInfo?id={{item._id}}" class="single_service_data" wx:for="{{services}}" wx:key="{{index}}">
+    <view class="service_name">{{_.formatServiceName(item.name)}}</view>
+    <view class="service_time sec_info">{{_.formatDate(item.updatedAt)}}</view>
+    <view class="service_state sec_info">{{_.formatStatus(item.status)}}</view>
   </navigator>
 </view>
 <view class="no-services" wx:if="{{!loading&&!services.length}}">暂时无服务</view>
