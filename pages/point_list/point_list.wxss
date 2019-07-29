@@ -4,7 +4,6 @@
   border-bottom: 1px solid #e6e6e6;
   padding:10px 5px;
   /* width: 100%; */
-  font-size: 3.47vw;
   display:block;
   text-align: center;
 }
@@ -18,7 +17,6 @@ page {
   background-color: white;
   color: #fff;
   padding: 8px 5px;
-  font-size:3.47vw;
   margin-bottom: 5vw;
 }
 
@@ -36,7 +34,6 @@ page {
   color: #fff;
   padding: 0px 14px;
   border-radius: 14px;
-  font-size: 3.47vw;
 }
 
 .top-bar .top-status {
@@ -44,25 +41,21 @@ page {
 
 .name {
   margin-left: 3.6vw;
-  font-size: 3.47vw;
 }
 
 .no-services {
   display: block;
   text-align: center;
   line-height: 2em;
-  font-size:3.47vw;
 }
 
 .date {
   margin-left: 11.47vw;
-  font-size: 3.47vw;
   color: #999;
 }
 
 .status {
   margin-left: 11.33vw;
-  font-size: 3.47vw;
   color: #999;
 }
 
@@ -93,14 +86,7 @@ button {
 .service_list_wrapper .single_service_data .service_name {
   color: #383838;
   /* flex: 2; */
-  font-size: 3.47vw;
   width:60vw;
-}
-
-.service_list_wrapper .single_service_data .service_time {
-}
-
-.service_list_wrapper .single_service_data .service_state {
 }
 
 .service_list_wrapper .single_service_data .sec_info {
@@ -108,6 +94,5 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3.47vw;
   margin: 0 3vw;
 }

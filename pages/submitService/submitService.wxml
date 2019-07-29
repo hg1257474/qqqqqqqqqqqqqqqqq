@@ -26,7 +26,9 @@
       <view wx:if="{{method==='contract'&&contract_type_checked==='1'}}" class="upload_flie_wrapper">
         <view class="upload_flie_tittle text-center">上传文件</view>
         <view class="upload_flie_content">
-          <button class="upload_flie_btn m-r" bindtap="onChooseFile">选择文件</button>
+          <picker bindchange="onChooseFile" range="{{['从微信会话中选择文件','从手机中选择文件']}}" >
+            <button class="upload_flie_btn m-r" >选择文件</button>
+          </picker>
           <text class="upload_flie_tips">不能上传大于10M的文件</text>
         </view>
         <view class="upload_flie_list">
@@ -99,4 +101,5 @@
     </view>
     <button form-type="submit" class="upload_flie_submit">提交</button>
   </view>
+
 </form>

@@ -2,6 +2,8 @@
 const {
   serviceUrl,
   CUSTOMER_DEFAULT_CONTACT_URL,
+  UPLOAD_FILE_URL,
+  SERVICE_FILE_URL,
   fileUploadUrl
 } = require("../../utils/config.js")
 let tempFileId = null
@@ -11,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    shouldChooseUploadMethod: false,
     files: [],
     method: 'contract',
     "contract_type_checked": '1', // 沟通方式
@@ -77,15 +80,8 @@ Page({
   onDeleteFile: function(e) {
     const that = this
     const id = e.currentTarget.dataset.id
-    wx.request({
-      url: fileUploadUrl + "/" + id,
-      method: "DELETE",
-      success(res) {
-        const files = that.data.files.filter(item => item[2] !== id)
-        that.setData({
-          files
-        })
-      }
+    this.setData({
+      files: this.data.files.filter(item => item[2] !== id)
     })
   },
   onShow() {
@@ -93,40 +89,46 @@ Page({
     const that = this
     if (tempFileId) {
       wx.request({
-        url: fileUploadUrl + "/summary/" + tempFileId,
-        method: "GET",
+        url: `${SERVICE_FILE_URL}?tempFileId=${tempFileId}`,
         success(res) {
-          console.log(res.data)
-          console.log(that.data)
-          res.data.push(tempFileId)
-          console.log(that.data.files)
           that.data.files.push(res.data)
-          tempFileId = null
-          console.log(that.data.files)
-          const newFiles = that.data.files.map(item => item)
-          console.log(newFiles)
-
           that.setData({
-            files: newFiles
+            files: that.data.files
           })
-
         }
       })
     }
   },
-  onChooseFile: function(options) {
+  onChooseFile: function(e) {
     const that = this
-    wx.request({
-      url: fileUploadUrl,
-      method: "POST",
-      success(res) {
-        console.log(res)
-        tempFileId = res.data
-        console.log("f")
-        wx.navigateTo({
-          url: "/pages/fileUpload/fileUpload?id=" + res.data
-        })
+    console.log(e.detail.value)
+    if (e.detail.value == 1)
+      wx.request({
+        url: SERVICE_FILE_URL,
+        method: "POST",
+        success(res) {
+          tempFileId = res.data
+          wx.navigateTo({
+            url: "/pages/fileUpload/fileUpload?id=" + res.data
+          })
 
+        }
+      })
+    else wx.chooseMessageFile({
+      count: 1,
+      success(res) {
+        const file = res.tempFiles[0]
+        wx.uploadFile({
+          url: `${SERVICE_FILE_URL}?isDirect=true`,
+          name: file.name,
+          filePath: file.path,
+          success(res) {
+            that.data.files.push([file.name, file.size, res.data])
+            that.setData({
+              files: that.data.files
+            })
+          }
+        })
       }
     })
   },

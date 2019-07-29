@@ -297,7 +297,7 @@ Page({
   onContract: function(e) {
     console.log("contract")
     console.log(this.data)
-    const category = this.data.indexPage[this.data.modal.category][1]
+    const category = this.data.indexPage[this.data.modal.category][0]
     const target = this.data.modal.name
     wx.navigateTo({
       url: `/pages/submitService/submitService?category=${category}&target=${target}&method=contract&contract_type_checked=1`

@@ -77,13 +77,13 @@ icon{
 }
 
 .advisory {
-  background: #0e2d6b;
+  background: #41b035;
   /* margin-right: 4.93vw; */
   border-radius:0 0 0 2.67vw;
 }
 
 .contract {
-  background: #ff6342;
+  background: #199fef;
   left: 50%;
   border-radius:0 0 2.67vw 0;
 }

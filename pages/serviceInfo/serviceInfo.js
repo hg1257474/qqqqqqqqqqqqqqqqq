@@ -1,6 +1,7 @@
 const {
   serviceUrl,
   customerUrl,
+  RESOURCE_URL,
   SERVICE_PAY_CONFIG_UTL,
   SERVICE_PAYMENT_STATUS_UTL
 } = require('../../utils/config.js')
@@ -97,9 +98,9 @@ Page({
     }
     console.log(type)
     console.log(type)
-    const url = `${serviceUrl}/description/file/data?serviceId=${serviceId}&index=${index}`
+    const url = `${RESOURCE_URL}/description/${this.data.description[index][2]}/${filename}`
     console.log(url)
-    if (["png", "jpg", "gif","jpeg"].includes(type)) {
+    if (["png", "jpg", "gif", "jpeg"].includes(type)) {
       wx.previewImage({
         urls: [url],
         complete(res) {
